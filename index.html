@@ -5,495 +5,442 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Wafa Academy</title>
 <link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-
 <script>
 /* ════════════════════════════════════════════════════════════════
-   ✏️  WAFA ACADEMY — ALL YOUR WEBSITE CONTENT IS HERE
-   ════════════════════════════════════════════════════════════════
-   HOW TO EDIT:
-   • Change any text between the quote marks "..."
-   • Do NOT remove the commas after each value
-   • Do NOT delete the { } or [ ] brackets
-   • Save the file → refresh your browser → changes appear instantly
+   ✏️  STEP 1 — Paste your Google Apps Script URL below
+        (Leave empty "" to run in offline/demo mode)
    ════════════════════════════════════════════════════════════════ */
+const API_URL = "";   // ← paste your Apps Script Web App URL here
 
-const SITE = {
-
-  /* ─────────────────────────────────────────────────────────────
-     ACADEMY IDENTITY
-  ───────────────────────────────────────────────────────────── */
+/* ════════════════════════════════════════════════════════════════
+   ✏️  SITE DEFAULTS — shown until overridden via Admin › Site Info
+   ════════════════════════════════════════════════════════════════ */
+const DEFAULTS = {
   name:        "Wafa Academy",
   tagline:     "Scientific Temper · Philosophical Rigor · Moral Benevolence",
-  established: "2024",
-  logo_letter: "و",   /* Arabic letter for Wāw — or change to W */
+  logo_letter: "و",
+  hero_badge:  "Foundational Sunday Classes · Srinagar, J&K",
+  hero_h1:     "Nurturing Minds Rooted in",
+  hero_em:     "Knowledge & Virtue",
+  hero_desc:   "Wafa Academy offers Sunday foundational courses that unite Islamic wisdom, natural sciences, mathematics and language — cultivating students who think rigorously, question honestly, and act with moral benevolence.",
+  address:     "Srinagar, Jammu & Kashmir — 190001",
+  phone:       "+91 000 000 0000",
+  email:       "info@wafaacademy.in",
+  hours:       "Sundays: 8:00 AM – 5:00 PM",
+  map_note:    "Exact venue shared upon enrollment",
+  schedule_day:"Every Sunday",
+  schedule_loc:"Srinagar, J&K",
+  schedule_note:"Batch timings confirmed at enrollment",
+  footer_about:"Sunday foundational classes in Islamic Studies, Science, Mathematics & Language — guided by scientific temper, philosophical rigor, and moral benevolence.",
+  copyright:   "© 2025 Wafa Academy, Srinagar. All rights reserved."
+};
 
-  /* ─────────────────────────────────────────────────────────────
-     HERO (Top banner of the page)
-  ───────────────────────────────────────────────────────────── */
-  hero: {
-    badge:           "Foundational Sunday Classes · Srinagar, J&K",
-    headline:        "Nurturing Minds Rooted in",
-    headline_italic: "Knowledge & Virtue",
-    description:     "Wafa Academy offers Sunday foundational courses that unite Islamic wisdom, natural sciences, mathematics, and language — cultivating students who think rigorously, question honestly, and act with moral benevolence.",
-    cta_primary:     "Explore Courses",
-    cta_secondary:   "Our Philosophy"
-  },
-
-  /* ─────────────────────────────────────────────────────────────
-     PHILOSOPHY — Three Pillars section
-  ───────────────────────────────────────────────────────────── */
-  philosophy: {
-    tag:          "Our Guiding Principle",
-    title:        "Three Pillars of",
-    title_italic: "Holistic Education",
-    intro:        "Every class at Wafa Academy is shaped by three inseparable ideals — drawn from the deepest wells of Islamic scholarship and universal human wisdom.",
-    pillars: [
-      {
-        icon:  "🔭",
-        title: "Scientific Temper",
-        text:  "We cultivate curiosity, evidence-based reasoning, and empirical inquiry. Students are taught to observe, question, and seek truth through rigorous investigation — a spirit endorsed by the Quran itself: 'Do they not look at the sky above them?' (50:6)"
-      },
-      {
-        icon:  "📜",
-        title: "Philosophical Rigor",
-        text:  "Students engage with ideas deeply — tracing arguments to their foundations, examining assumptions, and building disciplined coherent thought. From Kalam to logic, from Aristotle to Ibn Rushd, they learn to think with precision."
-      },
-      {
-        icon:  "🌿",
-        title: "Moral Benevolence",
-        text:  "Knowledge without character is incomplete. We nurture compassion, integrity, and responsibility toward family, community, and creation. The Prophet ﷺ said: 'The best among you is the one who is most beneficial to people.'"
-      }
-    ]
-  },
-
-  /* ─────────────────────────────────────────────────────────────
-     STATS STRIP (four numbers under the hero)
-  ───────────────────────────────────────────────────────────── */
-  stats: [
-    { number: "4",    label: "Core Disciplines"       },
-    { number: "1",    label: "Day a Week — Sundays"   },
-    { number: "100%", label: "Foundational Focus"     },
-    { number: "∞",    label: "Curiosity Encouraged"   }
-  ],
-
-  /* ─────────────────────────────────────────────────────────────
-     COURSES — add or remove courses here
-  ───────────────────────────────────────────────────────────── */
-  courses_section: {
-    tag:          "What We Teach",
-    title:        "Foundational",
-    title_italic: "Sunday Courses",
-    intro:        "Four carefully designed disciplines, each taught every Sunday. Structured for beginners and advancing learners alike."
-  },
-
-  /* Class schedule shown on every course */
-  schedule: {
-    day:      "Every Sunday",
-    location: "Srinagar, J&K",
-    note:     "Batch timings confirmed at enrollment"
-  },
-
-  courses: [
-    {
-      icon:         "☪️",
-      bg_from:      "#1a3a2e",
-      bg_to:        "#0d2019",
-      tag:          "Islamic Studies",
-      tag_style:    "emerald",
-      title:        "Islamic Foundations",
-      description:  "Quran recitation & Tajweed · Tafseer of selected Surahs · Hadith sciences (Usool ul Hadith) · Fiqh essentials · Seerah of the Prophet ﷺ · Islamic history from the Rightly-Guided Caliphs to the classical era.",
-      level:        "Beginner → Advanced",
-      timing:       "Morning Batch"
-    },
-    {
-      icon:         "🔬",
-      bg_from:      "#1a2a3e",
-      bg_to:        "#0d1828",
-      tag:          "Natural Sciences",
-      tag_style:    "blue",
-      title:        "Integrated Science",
-      description:  "Physics, chemistry, and biology taught through conceptual understanding and real-world phenomena. Special emphasis on how science and Islamic epistemology complement each other in seeking truth about the universe.",
-      level:        "Foundational",
-      timing:       "Mid-Morning Batch"
-    },
-    {
-      icon:         "📐",
-      bg_from:      "#2e1a3a",
-      bg_to:        "#1a0d28",
-      tag:          "Mathematics",
-      tag_style:    "violet",
-      title:        "Mathematics & Logic",
-      description:  "Arithmetic, algebra, geometry, and the foundations of mathematical reasoning. Logic and proof-writing woven through every lesson, alongside appreciation of Muslim mathematicians like Al-Khwarizmi and Al-Kindi.",
-      level:        "Foundational",
-      timing:       "Afternoon Batch"
-    },
-    {
-      icon:         "🗣️",
-      bg_from:      "#3a2a1a",
-      bg_to:        "#28180d",
-      tag:          "Language",
-      tag_style:    "amber",
-      title:        "Language Arts",
-      description:  "Classical Arabic (grammar & morphology) · Urdu literature and composition · English communication skills. Language is the vehicle of thought — we treat it with the reverence it deserves in every scholarly tradition.",
-      level:        "Beginner → Intermediate",
-      timing:       "Late Afternoon Batch"
-    }
-  ],
-
-  /* ─────────────────────────────────────────────────────────────
-     WHO CAN JOIN
-  ───────────────────────────────────────────────────────────── */
-  audience: {
-    tag:          "Who Can Join",
-    title:        "Open to",
-    title_italic: "All Seekers of Knowledge",
-    description:  "Wafa Academy welcomes students from all backgrounds. Our Sunday model fits around school, work, and family — making serious education accessible without compromise.",
-    groups: [
-      { icon: "🧒", title: "School Students (Grades 5–12)",  desc: "Supplement school learning with deeper conceptual foundations and Islamic grounding." },
-      { icon: "🎓", title: "College & University Students",   desc: "Revisit foundational disciplines with the rigor and perspective you never got before." },
-      { icon: "👨", title: "Working Professionals",           desc: "Sunday-only classes mean you never have to choose between livelihood and learning." },
-      { icon: "👩", title: "Homemakers & Adults",             desc: "Lifelong learners are our most motivated students. All ages, all welcome." }
-    ]
-  },
-
-  /* ─────────────────────────────────────────────────────────────
-     TESTIMONIALS
-  ───────────────────────────────────────────────────────────── */
-  testimonials: [
-    {
-      initials: "SA",
-      name:     "Sana Ashraf",
-      course:   "Islamic Foundations",
-      stars:    5,
-      text:     "For the first time, I understood the Quran not just as recitation but as a living intellectual tradition. The teachers connect classical scholarship with questions we actually face today."
-    },
-    {
-      initials: "BM",
-      name:     "Bilal Mir",
-      course:   "Integrated Science",
-      stars:    5,
-      text:     "I never thought science and my faith could be taught together so naturally. Wafa Academy showed me that a Muslim who doesn't marvel at the cosmos hasn't read the Quran properly."
-    },
-    {
-      initials: "FR",
-      name:     "Fareeda Rashid",
-      course:   "Mathematics & Logic",
-      stars:    5,
-      text:     "Learning that algebra was invented by a Muslim scholar made me sit up straight in every class. The Sunday model fits perfectly around my children's school week."
-    }
-  ],
-
-  /* ─────────────────────────────────────────────────────────────
-     FAQ — add or remove questions freely
-  ───────────────────────────────────────────────────────────── */
-  faqs: [
-    {
-      q: "When exactly are classes held?",
-      a: "All courses run exclusively on Sundays. Specific batch timings (morning, mid-morning, afternoon, late afternoon) are confirmed at enrollment based on availability and your preference."
-    },
-    {
-      q: "Is prior Islamic knowledge required?",
-      a: "Not at all. Courses are designed at a foundational level. Whether you have studied Deen formally or are starting fresh, we place you in the right group after a brief conversation."
-    },
-    {
-      q: "What age group is the academy for?",
-      a: "We welcome students from Grade 5 upward through adulthood. Separate batches are organized for younger students and adults to ensure age-appropriate discussion."
-    },
-    {
-      q: "Are all four courses compulsory?",
-      a: "No. You may enroll in one, two, three, or all four courses. We recommend at least two to experience how the disciplines reinforce each other."
-    },
-    {
-      q: "Is this affiliated with any school or madrasa?",
-      a: "Wafa Academy is an independent institution. We do not replace school or madrasa education — we deepen and complement it with an integrative, inquiry-driven approach."
-    },
-    {
-      q: "How do I enroll?",
-      a: "Fill in the enrollment form on this page or contact us directly. Our team will confirm your batch, timing, and fees within 24–48 hours."
-    }
-  ],
-
-  /* ─────────────────────────────────────────────────────────────
-     CONTACT DETAILS  ← update these with real info
-  ───────────────────────────────────────────────────────────── */
-  contact: {
-    tag:      "Reach Us",
-    title:    "Come &",
-    title_em: "Find Us",
-    address:  "Srinagar, Jammu & Kashmir — 190001",
-    phone:    "+91 000 000 0000",      /* ← replace with real number */
-    email:    "info@wafaacademy.in",   /* ← replace with real email  */
-    hours:    "Sundays: 8:00 AM – 5:00 PM",
-    map_note: "Exact venue address shared upon enrollment"
-  },
-
-  /* ─────────────────────────────────────────────────────────────
-     FOOTER
-  ───────────────────────────────────────────────────────────── */
-  footer: {
-    about:     "Sunday foundational classes in Islamic Studies, Science, Mathematics & Language — guided by scientific temper, philosophical rigor, and moral benevolence.",
-    copyright: "© 2025 Wafa Academy, Srinagar. All rights reserved."
-  }
-
-}; /* END OF CONFIG — do not remove this line */
+const COURSES = [
+  { id:"islamic",  icon:"☪️",  bg:"#1a3a2e,#0d2019", tag:"Islamic Studies", tc:"emerald", title:"Islamic Foundations",
+    desc:"Quran recitation & Tajweed · Tafseer of selected Surahs · Hadith sciences · Fiqh essentials · Seerah of the Prophet ﷺ · Islamic history from the Rightly-Guided Caliphs to the classical era.",
+    level:"Beginner → Advanced", timing:"Morning Batch" },
+  { id:"science",  icon:"🔬",  bg:"#1a2a3e,#0d1828", tag:"Natural Sciences",  tc:"blue",    title:"Integrated Science",
+    desc:"Physics, chemistry, and biology through conceptual understanding and real-world phenomena. Special emphasis on how science and Islamic epistemology complement each other in seeking truth.",
+    level:"Foundational", timing:"Mid-Morning Batch" },
+  { id:"maths",    icon:"📐",  bg:"#2e1a3a,#1a0d28", tag:"Mathematics",       tc:"violet",  title:"Mathematics & Logic",
+    desc:"Arithmetic, algebra, geometry, and the foundations of mathematical reasoning. Logic and proof-writing woven through every lesson, alongside appreciation of Muslim mathematicians like Al-Khwarizmi.",
+    level:"Foundational", timing:"Afternoon Batch" },
+  { id:"language", icon:"🗣️", bg:"#3a2a1a,#28180d", tag:"Language",          tc:"amber",   title:"Language Arts",
+    desc:"Classical Arabic (grammar & morphology) · Urdu literature and composition · English communication skills. Language is the vehicle of thought — treated with the reverence it deserves.",
+    level:"Beginner → Intermediate", timing:"Late Afternoon Batch" }
+];
 </script>
-
 <style>
-  :root {
-    --ink:      #1c1410;
-    --ink-mid:  #3d2f25;
-    --ink-soft: #7a6a5e;
-    --parch:    #fdf6e3;
-    --parch-2:  #f5ead0;
-    --parch-3:  #ede0c4;
-    --em:       #1a6648;
-    --em-l:     #2a9068;
-    --gold:     #b8892a;
-    --gold-l:   #d4a84b;
-    --r: 6px;
-    --sh: 0 8px 40px rgba(28,20,16,.12);
-    --sh-sm: 0 2px 12px rgba(28,20,16,.07);
-  }
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{background:var(--parch);color:var(--ink);font-family:'Nunito',sans-serif;font-size:16px;line-height:1.7;overflow-x:hidden}
-  ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--parch-2)}::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px}
+:root{
+  --ink:#1c1410;--ink-mid:#3d2f25;--ink-soft:#7a6a5e;
+  --p:#fdf6e3;--p2:#f5ead0;--p3:#ede0c4;
+  --em:#1a6648;--eml:#2a9068;
+  --gold:#b8892a;--goldl:#d4a84b;--goldp:#f5e6c0;
+  --r:6px;
+  --sh:0 8px 40px rgba(28,20,16,.12);
+  --shs:0 2px 12px rgba(28,20,16,.07);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--p);color:var(--ink);font-family:'Nunito',sans-serif;font-size:16px;line-height:1.7;overflow-x:hidden}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--p2)}::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px}
 
-  /* NAV */
-  nav{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 5vw;transition:all .4s}
-  nav.sc{background:rgba(253,246,227,.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(184,137,42,.18);box-shadow:var(--sh-sm);padding:.7rem 5vw}
-  .nlogo{display:flex;align-items:center;gap:.7rem;text-decoration:none}
-  .nmark{width:42px;height:42px;background:linear-gradient(135deg,var(--em),var(--em-l));border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Scheherazade New',serif;font-size:1.5rem;color:#f5e6c0;box-shadow:0 4px 16px rgba(26,102,72,.3)}
-  .nname{font-family:'Lora',serif;font-size:1.1rem;font-weight:700;color:var(--ink)}
-  .nname span{color:var(--em)}
-  .nlinks{display:flex;align-items:center;gap:2.2rem;list-style:none}
-  .nlinks a{text-decoration:none;color:var(--ink-mid);font-size:.82rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;transition:color .3s;position:relative}
-  .nlinks a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1.5px;background:var(--gold);transition:width .3s}
-  .nlinks a:hover{color:var(--em)}
-  .nlinks a:hover::after{width:100%}
-  .nenroll{background:linear-gradient(135deg,var(--em),var(--em-l))!important;color:#fff!important;padding:.5rem 1.3rem!important;border-radius:var(--r)!important;box-shadow:0 4px 16px rgba(26,102,72,.22)}
-  .nenroll::after{display:none!important}
-  .hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none}
-  .hbg span{display:block;width:24px;height:2px;background:var(--ink);border-radius:2px;transition:all .3s}
-  .mmenu{display:none;position:fixed;inset:0;z-index:998;background:rgba(253,246,227,.98);backdrop-filter:blur(20px);flex-direction:column;align-items:center;justify-content:center;gap:2rem}
-  .mmenu.open{display:flex}
-  .mmenu a{text-decoration:none;color:var(--ink);font-family:'Lora',serif;font-size:1.8rem;font-weight:700;transition:color .3s}
-  .mmenu a:hover{color:var(--em)}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:900;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 5vw;transition:all .4s}
+nav.sc{background:rgba(253,246,227,.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(184,137,42,.18);box-shadow:var(--shs);padding:.7rem 5vw}
+.nlogo{display:flex;align-items:center;gap:.7rem;text-decoration:none}
+.nmark{width:42px;height:42px;background:linear-gradient(135deg,var(--em),var(--eml));border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Scheherazade New',serif;font-size:1.5rem;color:var(--goldp);box-shadow:0 4px 16px rgba(26,102,72,.3)}
+.nname{font-family:'Lora',serif;font-size:1.1rem;font-weight:700;color:var(--ink)}.nname span{color:var(--em)}
+.nlinks{display:flex;align-items:center;gap:2rem;list-style:none}
+.nlinks a{text-decoration:none;color:var(--ink-mid);font-size:.8rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;transition:color .3s;position:relative}
+.nlinks a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1.5px;background:var(--gold);transition:width .3s}
+.nlinks a:hover{color:var(--em)}.nlinks a:hover::after{width:100%}
+.nenroll{background:linear-gradient(135deg,var(--em),var(--eml))!important;color:#fff!important;padding:.48rem 1.2rem!important;border-radius:var(--r)!important;box-shadow:0 4px 14px rgba(26,102,72,.22)}
+.nenroll::after{display:none!important}
+.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none}
+.hbg span{display:block;width:24px;height:2px;background:var(--ink);border-radius:2px;transition:all .3s}
+.mmenu{display:none;position:fixed;inset:0;z-index:898;background:rgba(253,246,227,.98);backdrop-filter:blur(20px);flex-direction:column;align-items:center;justify-content:center;gap:2rem}
+.mmenu.open{display:flex}
+.mmenu a{text-decoration:none;color:var(--ink);font-family:'Lora',serif;font-size:1.8rem;font-weight:700;transition:color .3s}
+.mmenu a:hover{color:var(--em)}
 
-  /* HERO */
-  #hero{min-height:100vh;display:flex;align-items:center;padding:8rem 5vw 5rem;position:relative;overflow:hidden;background:linear-gradient(160deg,#fdf6e3 0%,#f0e8d0 60%,#e8dcc0 100%)}
-  .h-panel{position:absolute;right:0;top:0;width:55%;height:100%;background:linear-gradient(135deg,rgba(26,102,72,.06),rgba(184,137,42,.08));clip-path:polygon(14% 0,100% 0,100% 100%,0 100%)}
-  .h-grid{position:absolute;right:0;top:0;width:55%;height:100%;background-image:repeating-linear-gradient(45deg,rgba(26,102,72,.04) 0px,rgba(26,102,72,.04) 1px,transparent 1px,transparent 40px),repeating-linear-gradient(-45deg,rgba(184,137,42,.04) 0px,rgba(184,137,42,.04) 1px,transparent 1px,transparent 40px);clip-path:polygon(14% 0,100% 0,100% 100%,0 100%)}
-  .h-bism{position:absolute;top:7rem;right:5vw;font-family:'Scheherazade New',serif;font-size:clamp(1.6rem,3.5vw,2.8rem);color:var(--em);opacity:.15;animation:fu 1.2s ease 1s both}
-  .h-cnt{position:relative;z-index:2;max-width:680px}
-  .h-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(26,102,72,.08);border:1px solid rgba(26,102,72,.25);padding:.4rem 1rem;border-radius:20px;font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--em);margin-bottom:1.5rem;animation:fu .8s ease both}
-  .h-badge::before{content:'';width:6px;height:6px;background:var(--em);border-radius:50%;animation:blink 2s ease-in-out infinite}
-  @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-  .h-title{font-family:'Lora',serif;font-size:clamp(2.4rem,5.5vw,4.2rem);font-weight:700;line-height:1.1;color:var(--ink);margin-bottom:1.5rem;animation:fu .8s ease .2s both}
-  .h-title em{font-style:italic;color:var(--em);display:block}
-  .h-desc{font-size:1.05rem;color:var(--ink-soft);max-width:540px;margin-bottom:2.2rem;line-height:1.9;animation:fu .8s ease .4s both}
-  .h-acts{display:flex;gap:1rem;flex-wrap:wrap;animation:fu .8s ease .6s both}
-  .h-pills{position:absolute;right:3vw;bottom:8%;z-index:2;display:flex;flex-direction:column;gap:.8rem;animation:fu .8s ease .9s both}
-  .h-pill{display:flex;align-items:center;gap:.8rem;background:rgba(253,246,227,.9);border:1px solid rgba(184,137,42,.25);border-radius:50px;padding:.6rem 1.2rem;backdrop-filter:blur(10px);box-shadow:var(--sh-sm);font-size:.82rem;font-weight:600;color:var(--ink-mid)}
-  @keyframes fu{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
-  .sdwn{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--ink-soft);font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;animation:fu 1s ease 1.3s both;z-index:2}
-  .sline{width:1px;height:46px;background:linear-gradient(to bottom,var(--gold),transparent);animation:sp 2s ease-in-out infinite}
-  @keyframes sp{0%,100%{opacity:1;transform:scaleY(1)}50%{opacity:.3;transform:scaleY(.5)}}
+/* HERO */
+#hero{min-height:100vh;display:flex;align-items:center;padding:8rem 5vw 5rem;position:relative;overflow:hidden;background:linear-gradient(160deg,#fdf6e3 0%,#f0e8d0 60%,#e8dcc0 100%)}
+.h-panel{position:absolute;right:0;top:0;width:55%;height:100%;background:linear-gradient(135deg,rgba(26,102,72,.06),rgba(184,137,42,.08));clip-path:polygon(14% 0,100% 0,100% 100%,0 100%)}
+.h-grid{position:absolute;right:0;top:0;width:55%;height:100%;background-image:repeating-linear-gradient(45deg,rgba(26,102,72,.035) 0,rgba(26,102,72,.035) 1px,transparent 1px,transparent 40px),repeating-linear-gradient(-45deg,rgba(184,137,42,.035) 0,rgba(184,137,42,.035) 1px,transparent 1px,transparent 40px);clip-path:polygon(14% 0,100% 0,100% 100%,0 100%)}
+.h-bism{position:absolute;top:7rem;right:5vw;font-family:'Scheherazade New',serif;font-size:clamp(1.6rem,3.5vw,2.8rem);color:var(--em);opacity:.15;animation:fu 1.2s ease 1s both}
+.h-cnt{position:relative;z-index:2;max-width:680px}
+.h-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(26,102,72,.08);border:1px solid rgba(26,102,72,.25);padding:.4rem 1rem;border-radius:20px;font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--em);margin-bottom:1.5rem;animation:fu .8s ease both}
+.h-badge::before{content:'';width:6px;height:6px;background:var(--em);border-radius:50%;animation:blink 2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.h-title{font-family:'Lora',serif;font-size:clamp(2.4rem,5.5vw,4.2rem);font-weight:700;line-height:1.1;color:var(--ink);margin-bottom:1.5rem;animation:fu .8s ease .2s both}
+.h-title em{font-style:italic;color:var(--em);display:block}
+.h-desc{font-size:1.05rem;color:var(--ink-soft);max-width:540px;margin-bottom:2.2rem;line-height:1.9;animation:fu .8s ease .4s both}
+.h-acts{display:flex;gap:1rem;flex-wrap:wrap;animation:fu .8s ease .6s both}
+.h-pills{position:absolute;right:3vw;bottom:8%;z-index:2;display:flex;flex-direction:column;gap:.8rem;animation:fu .8s ease .9s both}
+.h-pill{display:flex;align-items:center;gap:.8rem;background:rgba(253,246,227,.9);border:1px solid rgba(184,137,42,.25);border-radius:50px;padding:.6rem 1.2rem;backdrop-filter:blur(10px);box-shadow:var(--shs);font-size:.82rem;font-weight:600;color:var(--ink-mid)}
+@keyframes fu{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+.sdwn{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--ink-soft);font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;animation:fu 1s ease 1.3s both;z-index:2}
+.sline{width:1px;height:46px;background:linear-gradient(to bottom,var(--gold),transparent);animation:sp 2s ease-in-out infinite}
+@keyframes sp{0%,100%{opacity:1;transform:scaleY(1)}50%{opacity:.3;transform:scaleY(.5)}}
 
-  /* BTNS */
-  .b-em{background:linear-gradient(135deg,var(--em),var(--em-l));color:#fff;font-weight:700;padding:.85rem 2rem;border-radius:var(--r);text-decoration:none;font-size:.88rem;letter-spacing:.05em;text-transform:uppercase;transition:all .3s;border:none;cursor:pointer;box-shadow:0 6px 20px rgba(26,102,72,.3);display:inline-flex;align-items:center;gap:.5rem;font-family:'Nunito',sans-serif}
-  .b-em:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(26,102,72,.4)}
-  .b-out{background:transparent;color:var(--ink);border:1.5px solid rgba(28,20,16,.2);padding:.85rem 2rem;border-radius:var(--r);text-decoration:none;font-size:.88rem;letter-spacing:.05em;text-transform:uppercase;transition:all .3s;cursor:pointer;display:inline-flex;align-items:center;gap:.5rem;font-family:'Nunito',sans-serif;font-weight:700}
-  .b-out:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-3px)}
+/* BUTTONS */
+.be{background:linear-gradient(135deg,var(--em),var(--eml));color:#fff;font-weight:700;padding:.85rem 2rem;border-radius:var(--r);text-decoration:none;font-size:.88rem;letter-spacing:.05em;text-transform:uppercase;transition:all .3s;border:none;cursor:pointer;box-shadow:0 6px 20px rgba(26,102,72,.3);display:inline-flex;align-items:center;gap:.5rem;font-family:'Nunito',sans-serif}
+.be:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(26,102,72,.4)}
+.bo{background:transparent;color:var(--ink);border:1.5px solid rgba(28,20,16,.2);padding:.85rem 2rem;border-radius:var(--r);text-decoration:none;font-size:.88rem;letter-spacing:.05em;text-transform:uppercase;transition:all .3s;cursor:pointer;display:inline-flex;align-items:center;gap:.5rem;font-family:'Nunito',sans-serif;font-weight:700}
+.bo:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-3px)}
+.bpa{background:var(--p);color:var(--em);font-weight:700;padding:.9rem 2.2rem;border-radius:var(--r);text-decoration:none;font-size:.88rem;letter-spacing:.05em;text-transform:uppercase;transition:all .3s;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:.5rem;font-family:'Nunito',sans-serif}
+.bpa:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.bol{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.35);padding:.9rem 2.2rem;border-radius:var(--r);text-decoration:none;font-size:.88rem;letter-spacing:.05em;text-transform:uppercase;transition:all .3s;cursor:pointer;display:inline-flex;align-items:center;gap:.5rem;font-family:'Nunito',sans-serif;font-weight:700}
+.bol:hover{border-color:var(--goldp);color:var(--goldp);transform:translateY(-3px)}
 
-  /* SECTION COMMONS */
-  section{padding:5.5rem 5vw}
-  .stag{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700;color:var(--gold);display:block;margin-bottom:.8rem}
-  .stitle{font-family:'Lora',serif;font-size:clamp(1.9rem,3.5vw,2.9rem);font-weight:700;color:var(--ink);line-height:1.2;margin-bottom:.9rem}
-  .stitle em{font-style:italic;color:var(--em)}
-  .sdesc{color:var(--ink-soft);max-width:560px;font-size:.97rem;line-height:1.85}
-  .div{width:52px;height:2px;background:linear-gradient(to right,var(--gold),transparent);margin:1rem 0 1.3rem}
-  .div.c{margin-left:auto;margin-right:auto}
-  .sh{margin-bottom:3.5rem}
-  .sh.c{text-align:center}
-  .sh.c .sdesc{margin:0 auto}
+/* SECTION */
+section{padding:5.5rem 5vw}
+.stag{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700;color:var(--gold);display:block;margin-bottom:.8rem}
+.stitle{font-family:'Lora',serif;font-size:clamp(1.9rem,3.5vw,2.9rem);font-weight:700;color:var(--ink);line-height:1.2;margin-bottom:.9rem}
+.stitle em{font-style:italic;color:var(--em)}
+.sdesc{color:var(--ink-soft);max-width:560px;font-size:.97rem;line-height:1.85}
+.div{width:52px;height:2px;background:linear-gradient(to right,var(--gold),transparent);margin:1rem 0 1.3rem}
+.div.c{margin-left:auto;margin-right:auto}
+.sh{margin-bottom:3.5rem}.sh.c{text-align:center}.sh.c .sdesc{margin:0 auto}
 
-  /* STATS */
-  #stats{padding:3rem 5vw;background:var(--ink);position:relative;overflow:hidden}
-  .stats-pat{position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(253,246,227,.02) 0px,rgba(253,246,227,.02) 1px,transparent 1px,transparent 50px)}
-  .sg{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;position:relative;z-index:1}
-  .sb{text-align:center;padding:2rem 1rem;border-right:1px solid rgba(253,246,227,.07)}
-  .sb:last-child{border-right:none}
-  .sn{font-family:'Scheherazade New',serif;font-size:3rem;color:var(--gold-l);display:block;line-height:1}
-  .sl{font-size:.75rem;text-transform:uppercase;letter-spacing:.13em;color:rgba(253,246,227,.4);margin-top:.5rem;display:block}
+/* STATS */
+#stats{padding:3rem 5vw;background:var(--ink);position:relative;overflow:hidden}
+.spat{position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(253,246,227,.018) 0,rgba(253,246,227,.018) 1px,transparent 1px,transparent 50px)}
+.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;position:relative;z-index:1}
+.sb{text-align:center;padding:2rem 1rem;border-right:1px solid rgba(253,246,227,.07)}
+.sb:last-child{border-right:none}
+.sn{font-family:'Scheherazade New',serif;font-size:3rem;color:var(--goldl);display:block;line-height:1}
+.sl{font-size:.75rem;text-transform:uppercase;letter-spacing:.13em;color:rgba(253,246,227,.4);margin-top:.5rem;display:block}
 
-  /* PHILOSOPHY */
-  #philosophy{background:var(--parch-2)}
-  .pg{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-  .pc{padding:2.5rem 2rem;background:var(--parch);border:1px solid rgba(184,137,42,.15);border-radius:12px;transition:all .4s;position:relative;overflow:hidden}
-  .pc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,var(--em),var(--gold));transform:scaleX(0);transform-origin:left;transition:transform .4s}
-  .pc:hover{transform:translateY(-6px);box-shadow:var(--sh)}
-  .pc:hover::before{transform:scaleX(1)}
-  .pi{font-size:2.4rem;margin-bottom:1.2rem;display:block}
-  .pt{font-family:'Lora',serif;font-size:1.2rem;font-weight:700;color:var(--em);margin-bottom:.8rem}
-  .px{font-size:.88rem;color:var(--ink-soft);line-height:1.85}
+/* PHILOSOPHY */
+#philosophy{background:var(--p2)}
+.pg{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.pc{padding:2.5rem 2rem;background:var(--p);border:1px solid rgba(184,137,42,.15);border-radius:12px;transition:all .4s;position:relative;overflow:hidden}
+.pc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,var(--em),var(--gold));transform:scaleX(0);transform-origin:left;transition:transform .4s}
+.pc:hover{transform:translateY(-6px);box-shadow:var(--sh)}.pc:hover::before{transform:scaleX(1)}
+.pi{font-size:2.4rem;margin-bottom:1.2rem;display:block}
+.pt{font-family:'Lora',serif;font-size:1.2rem;font-weight:700;color:var(--em);margin-bottom:.8rem}
+.px{font-size:.88rem;color:var(--ink-soft);line-height:1.85}
 
-  /* COURSES */
-  #courses{background:var(--parch)}
-  .sched{display:inline-flex;align-items:center;gap:1.5rem;background:linear-gradient(135deg,var(--em),var(--em-l));color:#fff;padding:1rem 2rem;border-radius:8px;margin-bottom:3rem;flex-wrap:wrap;box-shadow:0 6px 24px rgba(26,102,72,.25)}
-  .si{display:flex;align-items:center;gap:.6rem;font-size:.85rem;font-weight:600}
-  .si:not(:last-child)::after{content:'·';margin-left:1rem;opacity:.4}
-  .cg{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
-  .cc{border-radius:12px;overflow:hidden;border:1px solid rgba(184,137,42,.12);transition:all .4s;background:var(--parch-2)}
-  .cc:hover{transform:translateY(-6px);box-shadow:var(--sh);border-color:rgba(26,102,72,.25)}
-  .ct{height:120px;display:flex;align-items:center;justify-content:center;font-size:3.2rem;position:relative}
-  .ctp{position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.04) 0px,rgba(255,255,255,.04) 1px,transparent 1px,transparent 30px)}
-  .cb{padding:1.6rem}
-  .ctag{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.25rem .7rem;border-radius:4px;margin-bottom:.8rem}
-  .t-emerald{background:rgba(26,102,72,.1);color:var(--em)}
-  .t-blue{background:rgba(37,99,235,.1);color:#2563eb}
-  .t-violet{background:rgba(124,58,237,.1);color:#7c3aed}
-  .t-amber{background:rgba(184,137,42,.15);color:var(--gold)}
-  .ctitle{font-family:'Lora',serif;font-size:1.25rem;font-weight:700;color:var(--ink);margin-bottom:.6rem;line-height:1.3}
-  .cdesc{font-size:.85rem;color:var(--ink-soft);line-height:1.8;margin-bottom:1.2rem}
-  .cmeta{display:flex;gap:1.5rem;flex-wrap:wrap;padding-top:1rem;border-top:1px solid rgba(28,20,16,.07);font-size:.78rem;color:var(--ink-soft);font-weight:600}
-  .cmeta span{display:flex;align-items:center;gap:.35rem}
+/* COURSES */
+#courses{background:var(--p)}
+.sched{display:inline-flex;align-items:center;gap:1.5rem;background:linear-gradient(135deg,var(--em),var(--eml));color:#fff;padding:1rem 2rem;border-radius:8px;margin-bottom:3rem;flex-wrap:wrap;box-shadow:0 6px 24px rgba(26,102,72,.25)}
+.sci:not(:last-child)::after{content:'·';margin-left:1.5rem;opacity:.4}
+.sci{display:flex;align-items:center;gap:.5rem;font-size:.85rem;font-weight:600}
+.cg{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+.cc{border-radius:12px;overflow:hidden;border:1px solid rgba(184,137,42,.12);transition:all .4s;background:var(--p2)}
+.cc:hover{transform:translateY(-6px);box-shadow:var(--sh);border-color:rgba(26,102,72,.25)}
+.ct{height:120px;display:flex;align-items:center;justify-content:center;font-size:3.2rem;position:relative}
+.ctp{position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.04) 0,rgba(255,255,255,.04) 1px,transparent 1px,transparent 30px)}
+.cb{padding:1.6rem}
+.ctg{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.25rem .7rem;border-radius:4px;margin-bottom:.8rem}
+.t-emerald{background:rgba(26,102,72,.1);color:var(--em)}
+.t-blue{background:rgba(37,99,235,.1);color:#2563eb}
+.t-violet{background:rgba(124,58,237,.1);color:#7c3aed}
+.t-amber{background:rgba(184,137,42,.15);color:var(--gold)}
+.ctitle{font-family:'Lora',serif;font-size:1.25rem;font-weight:700;color:var(--ink);margin-bottom:.6rem;line-height:1.3}
+.cdesc{font-size:.85rem;color:var(--ink-soft);line-height:1.8;margin-bottom:1.2rem}
+.cmeta{display:flex;gap:1.5rem;flex-wrap:wrap;padding-top:1rem;border-top:1px solid rgba(28,20,16,.07);font-size:.78rem;color:var(--ink-soft);font-weight:600;margin-bottom:1rem}
+.cmeta span{display:flex;align-items:center;gap:.35rem}
+.cres-btn{display:inline-flex;align-items:center;gap:.4rem;font-size:.78rem;font-weight:700;color:var(--em);background:rgba(26,102,72,.08);border:1px solid rgba(26,102,72,.2);border-radius:4px;padding:.3rem .75rem;cursor:pointer;transition:all .3s;text-transform:uppercase;letter-spacing:.06em;font-family:'Nunito',sans-serif}
+.cres-btn:hover{background:rgba(26,102,72,.15);transform:translateY(-1px)}
 
-  /* AUDIENCE */
-  #audience{background:var(--parch-2)}
-  .aw{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
-  .ags{display:flex;flex-direction:column;gap:1rem}
-  .ar{display:flex;gap:1rem;align-items:flex-start;padding:1.2rem;background:var(--parch);border:1px solid rgba(184,137,42,.12);border-radius:10px;transition:all .3s}
-  .ar:hover{border-color:rgba(26,102,72,.3);transform:translateX(5px);box-shadow:var(--sh-sm)}
-  .aico{font-size:1.5rem;min-width:40px;text-align:center}
-  .ati{font-weight:700;color:var(--ink);margin-bottom:.2rem;font-size:.95rem}
-  .ade{font-size:.83rem;color:var(--ink-soft);line-height:1.6}
-  .avis{position:relative;height:400px;display:flex;align-items:center;justify-content:center}
-  .aring{position:absolute;border-radius:50%;border:1.5px dashed rgba(26,102,72,.15)}
-  .ar1{width:280px;height:280px;animation:rot 25s linear infinite}
-  .ar2{width:380px;height:380px;animation:rot 35s linear infinite reverse}
-  @keyframes rot{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-  .acen{width:180px;height:180px;background:linear-gradient(135deg,var(--em),var(--em-l));border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:1rem;z-index:2;position:relative;box-shadow:0 12px 40px rgba(26,102,72,.3)}
-  .acen-ar{font-family:'Scheherazade New',serif;font-size:2.5rem;color:#f5e6c0;line-height:1}
-  .acen-lb{font-size:.62rem;color:rgba(255,255,255,.65);text-transform:uppercase;letter-spacing:.15em;margin-top:.3rem}
-  .adot{position:absolute;width:10px;height:10px;background:var(--gold);border-radius:50%;box-shadow:0 0 8px var(--gold)}
+/* AUDIENCE */
+#audience{background:var(--p2)}
+.aw{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.ags{display:flex;flex-direction:column;gap:1rem}
+.ar{display:flex;gap:1rem;align-items:flex-start;padding:1.2rem;background:var(--p);border:1px solid rgba(184,137,42,.12);border-radius:10px;transition:all .3s}
+.ar:hover{border-color:rgba(26,102,72,.3);transform:translateX(5px);box-shadow:var(--shs)}
+.aico{font-size:1.5rem;min-width:40px;text-align:center}
+.ati{font-weight:700;color:var(--ink);margin-bottom:.2rem;font-size:.95rem}
+.ade{font-size:.83rem;color:var(--ink-soft);line-height:1.6}
+.avis{position:relative;height:380px;display:flex;align-items:center;justify-content:center}
+.aring{position:absolute;border-radius:50%;border:1.5px dashed rgba(26,102,72,.15)}
+.ar1{width:280px;height:280px;animation:rot 25s linear infinite}
+.ar2{width:370px;height:370px;animation:rot 35s linear infinite reverse}
+@keyframes rot{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.acen{width:170px;height:170px;background:linear-gradient(135deg,var(--em),var(--eml));border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:1rem;z-index:2;position:relative;box-shadow:0 12px 40px rgba(26,102,72,.3)}
+.acen-ar{font-family:'Scheherazade New',serif;font-size:2.4rem;color:var(--goldp);line-height:1}
+.acen-lb{font-size:.62rem;color:rgba(255,255,255,.65);text-transform:uppercase;letter-spacing:.15em;margin-top:.3rem}
+.adot{position:absolute;width:10px;height:10px;background:var(--gold);border-radius:50%;box-shadow:0 0 8px var(--gold)}
 
-  /* TESTIMONIALS */
-  #testimonials{background:var(--parch)}
-  .tg{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-  .tc{padding:2rem;background:var(--parch-2);border:1px solid rgba(184,137,42,.12);border-radius:12px;position:relative;transition:all .3s}
-  .tc:hover{transform:translateY(-4px);box-shadow:var(--sh)}
-  .tqm{position:absolute;top:1.2rem;right:1.5rem;font-family:'Scheherazade New',serif;font-size:5rem;color:rgba(184,137,42,.12);line-height:1}
-  .tst{color:var(--gold);margin-bottom:.8rem;font-size:.9rem}
-  .ttx{font-size:.88rem;color:var(--ink-soft);line-height:1.85;margin-bottom:1.5rem;font-style:italic}
-  .tau{display:flex;align-items:center;gap:.8rem}
-  .tav{width:42px;height:42px;background:linear-gradient(135deg,var(--em),var(--em-l));border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.85rem}
-  .tnm{font-weight:700;color:var(--ink);font-size:.9rem}
-  .tco{font-size:.75rem;color:var(--ink-soft)}
+/* EVENTS */
+#events{background:var(--p)}
+.evg{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.evc{padding:1.8rem;background:var(--p2);border:1px solid rgba(184,137,42,.12);border-radius:12px;transition:all .3s;position:relative;overflow:hidden}
+.evc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--em),var(--gold))}
+.evc:hover{transform:translateY(-4px);box-shadow:var(--sh);border-color:rgba(26,102,72,.25)}
+.ev-type{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--em);background:rgba(26,102,72,.08);padding:.2rem .6rem;border-radius:3px;display:inline-block;margin-bottom:.8rem}
+.ev-title{font-family:'Lora',serif;font-size:1.15rem;font-weight:700;color:var(--ink);margin-bottom:.6rem}
+.ev-meta{display:flex;flex-direction:column;gap:.3rem;margin-bottom:.8rem}
+.ev-meta span{font-size:.82rem;color:var(--ink-soft);display:flex;align-items:center;gap:.4rem}
+.ev-desc{font-size:.84rem;color:var(--ink-soft);line-height:1.7}
+.ev-empty{text-align:center;padding:3rem;color:var(--ink-soft);font-style:italic;grid-column:1/-1}
 
-  /* FAQ */
-  #faq{background:var(--parch-2)}
-  .fi-wrap{max-width:780px;margin:0 auto}
-  .fitem{border-bottom:1px solid rgba(28,20,16,.09)}
-  .fq{width:100%;background:none;border:none;cursor:pointer;padding:1.4rem 0;display:flex;align-items:center;justify-content:space-between;text-align:left;color:var(--ink);font-family:'Nunito',sans-serif;font-size:.97rem;font-weight:700;transition:color .3s}
-  .fq:hover{color:var(--em)}
-  .fq.act{color:var(--em)}
-  .fic{width:28px;height:28px;min-width:28px;background:rgba(26,102,72,.08);border:1px solid rgba(26,102,72,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--em);transition:transform .3s}
-  .fq.act .fic{transform:rotate(45deg)}
-  .fa{max-height:0;overflow:hidden;transition:max-height .45s ease,padding .3s}
-  .fa.op{max-height:300px;padding-bottom:1.3rem}
-  .fa p{font-size:.9rem;color:var(--ink-soft);line-height:1.85}
+/* BLOG */
+#blog{background:var(--p2)}
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.bc{background:var(--p);border:1px solid rgba(184,137,42,.12);border-radius:12px;overflow:hidden;transition:all .4s;cursor:pointer}
+.bc:hover{transform:translateY(-6px);box-shadow:var(--sh);border-color:rgba(26,102,72,.25)}
+.bc-head{height:100px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--em),#0d4a30);font-family:'Scheherazade New',serif;font-size:2.2rem;color:rgba(245,230,192,.3);letter-spacing:.05em;position:relative}
+.bc-cat{position:absolute;bottom:.6rem;left:1rem;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--goldp);background:rgba(0,0,0,.2);padding:.2rem .5rem;border-radius:3px}
+.bc-body{padding:1.5rem}
+.bc-date{font-size:.75rem;color:var(--ink-soft);margin-bottom:.5rem;letter-spacing:.06em}
+.bc-title{font-family:'Lora',serif;font-size:1.15rem;font-weight:700;color:var(--ink);margin-bottom:.6rem;line-height:1.3}
+.bc-sum{font-size:.85rem;color:var(--ink-soft);line-height:1.75;margin-bottom:1rem}
+.bc-footer{display:flex;align-items:center;justify-content:space-between;padding-top:.8rem;border-top:1px solid rgba(28,20,16,.07)}
+.bc-author{font-size:.75rem;color:var(--ink-soft)}
+.bc-link{font-size:.78rem;font-weight:700;color:var(--em);text-decoration:none;text-transform:uppercase;letter-spacing:.06em;transition:gap .2s;display:flex;align-items:center;gap:.3rem}
+.bc-link:hover{gap:.6rem}
+.blog-empty{text-align:center;padding:3rem;color:var(--ink-soft);font-style:italic;grid-column:1/-1}
 
-  /* CONTACT */
-  #contact{background:var(--parch)}
-  .cw{display:grid;grid-template-columns:1fr 1.5fr;gap:4rem;align-items:start}
-  .cdet{display:flex;flex-direction:column;gap:1.2rem}
-  .cbox{display:flex;gap:1rem;padding:1.2rem;background:var(--parch-2);border:1px solid rgba(184,137,42,.12);border-radius:10px;transition:all .3s}
-  .cbox:hover{border-color:rgba(26,102,72,.25);transform:translateX(4px)}
-  .cic{width:42px;height:42px;min-width:42px;background:linear-gradient(135deg,var(--em),var(--em-l));border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem}
-  .clb{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-soft);margin-bottom:.2rem}
-  .cvl{color:var(--ink);font-size:.9rem;font-weight:600}
-  .cfw{background:var(--parch-2);border:1px solid rgba(184,137,42,.15);border-radius:12px;padding:2.5rem}
-  .ftl{font-family:'Lora',serif;font-size:1.5rem;font-weight:700;color:var(--ink);margin-bottom:.3rem}
-  .fsb{font-size:.84rem;color:var(--ink-soft);margin-bottom:1.8rem}
-  .frow{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-  .fg{margin-bottom:1rem}
-  .fg label{display:block;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-mid);margin-bottom:.45rem}
-  .fg input,.fg select,.fg textarea{width:100%;padding:.75rem 1rem;background:var(--parch);border:1.5px solid rgba(184,137,42,.2);border-radius:var(--r);color:var(--ink);font-family:'Nunito',sans-serif;font-size:.9rem;transition:border-color .3s;outline:none}
-  .fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--em);box-shadow:0 0 0 3px rgba(26,102,72,.1)}
-  .fg textarea{resize:vertical;min-height:90px}
-  .fg select option{background:var(--parch)}
+/* TESTIMONIALS */
+#testimonials{background:var(--p)}
+.tg{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.tc{padding:2rem;background:var(--p2);border:1px solid rgba(184,137,42,.12);border-radius:12px;position:relative;transition:all .3s}
+.tc:hover{transform:translateY(-4px);box-shadow:var(--sh)}
+.tqm{position:absolute;top:1.2rem;right:1.5rem;font-family:'Scheherazade New',serif;font-size:5rem;color:rgba(184,137,42,.12);line-height:1}
+.tst{color:var(--gold);margin-bottom:.8rem;font-size:.9rem}
+.ttx{font-size:.88rem;color:var(--ink-soft);line-height:1.85;margin-bottom:1.5rem;font-style:italic}
+.tau{display:flex;align-items:center;gap:.8rem}
+.tav{width:42px;height:42px;background:linear-gradient(135deg,var(--em),var(--eml));border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.85rem}
+.tnm{font-weight:700;color:var(--ink);font-size:.9rem}
+.tco{font-size:.75rem;color:var(--ink-soft)}
 
-  /* ENROLL BANNER */
-  #ebanner{background:linear-gradient(135deg,var(--em) 0%,#0d4a30 100%);padding:5rem 5vw;text-align:center;position:relative;overflow:hidden}
-  .epat{position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.03) 0px,rgba(255,255,255,.03) 1px,transparent 1px,transparent 55px)}
-  .einner{position:relative;z-index:1}
-  .ear{font-family:'Scheherazade New',serif;font-size:clamp(2rem,5vw,3.8rem);color:rgba(255,255,255,.15);margin-bottom:.8rem;letter-spacing:.05em}
-  .etitle{font-family:'Lora',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;color:#fff;margin-bottom:1rem}
-  .edesc{color:rgba(255,255,255,.65);max-width:560px;margin:0 auto 2rem;font-size:.97rem;line-height:1.8}
-  .eacts{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-  .b-pa{background:var(--parch);color:var(--em);font-weight:700;padding:.9rem 2.2rem;border-radius:var(--r);text-decoration:none;font-size:.88rem;letter-spacing:.05em;text-transform:uppercase;transition:all .3s;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:.5rem;font-family:'Nunito',sans-serif}
-  .b-pa:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.25)}
-  .b-ol{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.35);padding:.9rem 2.2rem;border-radius:var(--r);text-decoration:none;font-size:.88rem;letter-spacing:.05em;text-transform:uppercase;transition:all .3s;cursor:pointer;display:inline-flex;align-items:center;gap:.5rem;font-family:'Nunito',sans-serif;font-weight:700}
-  .b-ol:hover{border-color:#f5e6c0;color:#f5e6c0;transform:translateY(-3px)}
+/* FAQ */
+#faq{background:var(--p2)}
+.fw{max-width:780px;margin:0 auto}
+.fi{border-bottom:1px solid rgba(28,20,16,.09)}
+.fq{width:100%;background:none;border:none;cursor:pointer;padding:1.4rem 0;display:flex;align-items:center;justify-content:space-between;text-align:left;color:var(--ink);font-family:'Nunito',sans-serif;font-size:.97rem;font-weight:700;transition:color .3s}
+.fq:hover{color:var(--em)}.fq.act{color:var(--em)}
+.fic{width:28px;height:28px;min-width:28px;background:rgba(26,102,72,.08);border:1px solid rgba(26,102,72,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--em);transition:transform .3s}
+.fq.act .fic{transform:rotate(45deg)}
+.fa{max-height:0;overflow:hidden;transition:max-height .45s ease,padding .3s}
+.fa.op{max-height:300px;padding-bottom:1.3rem}
+.fa p{font-size:.9rem;color:var(--ink-soft);line-height:1.85}
 
-  /* FOOTER */
-  footer{background:var(--ink);padding:4rem 5vw 2rem;border-top:1px solid rgba(184,137,42,.15)}
-  .fgrid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
-  .far-brand{font-family:'Scheherazade New',serif;font-size:2rem;color:var(--gold-l);margin:.8rem 0;letter-spacing:.05em}
-  .fab{font-size:.85rem;color:rgba(253,246,227,.4);line-height:1.8;max-width:280px}
-  .fct{font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(253,246,227,.45);margin-bottom:1.2rem}
-  .flinks{list-style:none;display:flex;flex-direction:column;gap:.7rem}
-  .flinks a{text-decoration:none;color:rgba(253,246,227,.55);font-size:.875rem;transition:color .3s}
-  .flinks a:hover{color:var(--gold-l)}
-  .fbot{padding-top:2rem;border-top:1px solid rgba(253,246,227,.07);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
-  .fbot p{font-size:.78rem;color:rgba(253,246,227,.28)}
+/* CONTACT */
+#contact{background:var(--p)}
+.cw{display:grid;grid-template-columns:1fr 1.5fr;gap:4rem;align-items:start}
+.cdet{display:flex;flex-direction:column;gap:1.2rem}
+.cbox{display:flex;gap:1rem;padding:1.2rem;background:var(--p2);border:1px solid rgba(184,137,42,.12);border-radius:10px;transition:all .3s}
+.cbox:hover{border-color:rgba(26,102,72,.25);transform:translateX(4px)}
+.cic{width:42px;height:42px;min-width:42px;background:linear-gradient(135deg,var(--em),var(--eml));border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem}
+.clb{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-soft);margin-bottom:.2rem}
+.cvl{color:var(--ink);font-size:.9rem;font-weight:600}
+.cfw{background:var(--p2);border:1px solid rgba(184,137,42,.15);border-radius:12px;padding:2.5rem}
+.ftl{font-family:'Lora',serif;font-size:1.5rem;font-weight:700;color:var(--ink);margin-bottom:.3rem}
+.fsb{font-size:.84rem;color:var(--ink-soft);margin-bottom:1.8rem}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.fg{margin-bottom:1rem}
+.fg label{display:block;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-mid);margin-bottom:.45rem}
+.fg input,.fg select,.fg textarea{width:100%;padding:.75rem 1rem;background:var(--p);border:1.5px solid rgba(184,137,42,.2);border-radius:var(--r);color:var(--ink);font-family:'Nunito',sans-serif;font-size:.9rem;transition:border-color .3s;outline:none}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--em);box-shadow:0 0 0 3px rgba(26,102,72,.1)}
+.fg textarea{resize:vertical;min-height:90px}
+.fg select option{background:var(--p)}
 
-  /* BACK TO TOP / NOTIFICATION */
-  .btt{position:fixed;bottom:1.5rem;right:1.5rem;z-index:100;width:42px;height:42px;background:linear-gradient(135deg,var(--em),var(--em-l));border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem;box-shadow:0 6px 20px rgba(26,102,72,.35);transition:all .3s;opacity:0;transform:translateY(20px)}
-  .btt.vis{opacity:1;transform:translateY(0)}
-  .btt:hover{transform:translateY(-3px)}
-  .notif{position:fixed;top:80px;right:1.5rem;z-index:9999;background:var(--parch);color:var(--ink);border:1.5px solid rgba(26,102,72,.3);border-radius:10px;padding:1rem 1.4rem;display:flex;align-items:center;gap:.8rem;box-shadow:var(--sh);transform:translateX(120%);transition:transform .4s cubic-bezier(.16,1,.3,1);max-width:320px}
-  .notif.show{transform:translateX(0)}
-  .notif-msg{font-size:.875rem;font-weight:600}
+/* ENROLL BANNER */
+#ebanner{background:linear-gradient(135deg,var(--em) 0%,#0d4a30 100%);padding:5rem 5vw;text-align:center;position:relative;overflow:hidden}
+.epat{position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.025) 0,rgba(255,255,255,.025) 1px,transparent 1px,transparent 55px)}
+.einn{position:relative;z-index:1}
+.ear{font-family:'Scheherazade New',serif;font-size:clamp(2rem,5vw,3.8rem);color:rgba(255,255,255,.14);margin-bottom:.8rem}
+.etitle{font-family:'Lora',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;color:#fff;margin-bottom:1rem}
+.edesc{color:rgba(255,255,255,.65);max-width:560px;margin:0 auto 2rem;font-size:.97rem;line-height:1.8}
+.eacts{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
 
-  /* FADE-IN */
-  .fi{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
-  .fi.vis{opacity:1;transform:translateY(0)}
-  .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+/* FOOTER */
+footer{background:var(--ink);padding:4rem 5vw 2rem;border-top:1px solid rgba(184,137,42,.15)}
+.fgrid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
+.far-brand{font-family:'Scheherazade New',serif;font-size:2rem;color:var(--goldl);margin:.8rem 0;letter-spacing:.05em}
+.fab{font-size:.85rem;color:rgba(253,246,227,.4);line-height:1.8;max-width:280px}
+.fct{font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(253,246,227,.45);margin-bottom:1.2rem}
+.flinks{list-style:none;display:flex;flex-direction:column;gap:.7rem}
+.flinks a{text-decoration:none;color:rgba(253,246,227,.55);font-size:.875rem;transition:color .3s}
+.flinks a:hover{color:var(--goldl)}
+.fbot{padding-top:2rem;border-top:1px solid rgba(253,246,227,.07);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.fbot p{font-size:.78rem;color:rgba(253,246,227,.28)}
 
-  /* RESPONSIVE */
-  @media(max-width:1024px){.pg{grid-template-columns:1fr 1fr}.fgrid{grid-template-columns:1fr 1fr}}
-  @media(max-width:900px){.h-pills{display:none}.cg{grid-template-columns:1fr}.aw{grid-template-columns:1fr}.tg{grid-template-columns:1fr}.cw{grid-template-columns:1fr}.sg{grid-template-columns:repeat(2,1fr)}}
-  @media(max-width:700px){.nlinks{display:none}.hbg{display:flex}.pg{grid-template-columns:1fr}.frow{grid-template-columns:1fr}.fgrid{grid-template-columns:1fr}section{padding:4rem 5vw}}
+/* BACK TOP / NOTIF */
+.btt{position:fixed;bottom:1.5rem;right:1.5rem;z-index:100;width:42px;height:42px;background:linear-gradient(135deg,var(--em),var(--eml));border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem;box-shadow:0 6px 20px rgba(26,102,72,.35);transition:all .3s;opacity:0;transform:translateY(20px)}
+.btt.vis{opacity:1;transform:translateY(0)}.btt:hover{transform:translateY(-3px)}
+.notif{position:fixed;top:80px;right:1.5rem;z-index:9999;background:var(--p);color:var(--ink);border:1.5px solid rgba(26,102,72,.3);border-radius:10px;padding:1rem 1.4rem;display:flex;align-items:center;gap:.8rem;box-shadow:var(--sh);transform:translateX(120%);transition:transform .4s cubic-bezier(.16,1,.3,1);max-width:320px}
+.notif.show{transform:translateX(0)}
+.notif-msg{font-size:.875rem;font-weight:600}
+
+/* FADE-IN */
+.fi0{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.fi0.vis{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+/* MODAL (resources + blog reader) */
+.modal-overlay{position:fixed;inset:0;z-index:1200;background:rgba(28,20,16,.65);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:1rem}
+.modal-overlay.open{display:flex}
+.modal-box{background:var(--p);border-radius:14px;width:100%;max-width:720px;max-height:85vh;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,.3);border:1px solid rgba(184,137,42,.2);overflow:hidden}
+.modal-hdr{padding:1.4rem 2rem;background:linear-gradient(135deg,var(--em),var(--eml));display:flex;align-items:center;justify-content:space-between}
+.modal-hdr-title{font-family:'Lora',serif;font-size:1.2rem;font-weight:700;color:#fff}
+.modal-close{background:rgba(255,255,255,.15);border:none;color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.modal-close:hover{background:rgba(255,255,255,.28)}
+.modal-body{overflow-y:auto;padding:2rem;flex:1}
+.res-item{display:flex;align-items:flex-start;gap:1rem;padding:1rem;background:var(--p2);border:1px solid rgba(184,137,42,.12);border-radius:8px;margin-bottom:.8rem;transition:border-color .2s}
+.res-item:hover{border-color:rgba(26,102,72,.25)}
+.res-ico{width:38px;height:38px;min-width:38px;background:linear-gradient(135deg,var(--em),var(--eml));border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.95rem}
+.res-title{font-weight:700;color:var(--ink);font-size:.9rem;margin-bottom:.2rem}
+.res-desc{font-size:.8rem;color:var(--ink-soft);margin-bottom:.4rem}
+.res-link{font-size:.78rem;color:var(--em);font-weight:600;text-decoration:none;word-break:break-all}
+.res-link:hover{text-decoration:underline}
+.res-empty{text-align:center;padding:2.5rem;color:var(--ink-soft);font-style:italic}
+
+/* BLOG POST MODAL */
+.blog-content{font-size:.94rem;color:var(--ink-mid);line-height:1.9}
+.blog-content p{margin-bottom:1rem}
+.blog-modal-meta{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid rgba(184,137,42,.15)}
+.blog-modal-meta span{font-size:.78rem;color:var(--ink-soft)}
+
+/* ADMIN TRIGGER */
+#adm-btn{position:fixed;bottom:5.5rem;right:1.5rem;background:rgba(26,102,72,.88);color:#fff;border:none;border-radius:50%;width:38px;height:38px;font-size:.85rem;cursor:pointer;z-index:98;box-shadow:0 4px 14px rgba(26,102,72,.35);display:flex;align-items:center;justify-content:center;transition:all .3s}
+#adm-btn:hover{transform:scale(1.1)}
+
+/* ADMIN OVERLAY */
+.ap{position:fixed;inset:0;z-index:2000;background:rgba(28,20,16,.72);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:1rem}
+.ap.open{display:flex}
+
+/* LOGIN */
+.ap-login{display:flex;align-items:center;justify-content:center;width:100%}
+.ap-lbox{background:var(--p);border-radius:16px;padding:3rem 2.5rem;width:100%;max-width:400px;text-align:center;box-shadow:0 24px 80px rgba(0,0,0,.3);border:1px solid rgba(184,137,42,.2)}
+.ap-llogo{font-size:2.5rem;margin-bottom:1rem}
+.ap-ltitle{font-family:'Lora',serif;font-size:1.6rem;font-weight:700;color:var(--ink);margin-bottom:.4rem}
+.ap-lsub{font-size:.85rem;color:var(--ink-soft);margin-bottom:.4rem;line-height:1.6}
+.ap-lnote{font-size:.75rem;color:var(--goldl);margin-bottom:1.4rem;display:flex;align-items:center;gap:.4rem;justify-content:center}
+.ap-pw{width:100%;padding:.8rem 1rem;background:var(--p2);border:1.5px solid rgba(184,137,42,.3);border-radius:8px;font-size:1rem;font-family:'Nunito',sans-serif;color:var(--ink);outline:none;transition:border-color .3s;margin-bottom:.7rem}
+.ap-pw:focus{border-color:var(--em);box-shadow:0 0 0 3px rgba(26,102,72,.1)}
+.ap-err{font-size:.82rem;color:#dc2626;margin-bottom:.7rem;font-weight:600;display:none}
+.ap-lbtn{width:100%;padding:.85rem;background:linear-gradient(135deg,var(--em),var(--eml));color:#fff;border:none;border-radius:8px;font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:.05em;transition:all .3s;margin-bottom:.6rem}
+.ap-lbtn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(26,102,72,.35)}
+.ap-lcancel{background:none;border:none;color:var(--ink-soft);font-size:.85rem;cursor:pointer;font-family:'Nunito',sans-serif;text-decoration:underline}
+
+/* MAIN ADMIN */
+.ap-main{background:var(--p);border-radius:16px;width:100%;max-width:1180px;max-height:92vh;display:none;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,.3);border:1px solid rgba(184,137,42,.2);overflow:hidden}
+.ap-main.open{display:flex}
+.ap-hdr{padding:1.2rem 2rem;background:linear-gradient(135deg,var(--em),var(--eml));display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.ap-hdr-l{display:flex;align-items:center;gap:.8rem}
+.ap-hdr-ico{font-size:1.6rem}
+.ap-hdr-name{font-family:'Lora',serif;font-size:1.2rem;font-weight:700;color:#fff}
+.ap-hdr-sub{font-size:.75rem;color:rgba(255,255,255,.65)}
+.ap-hdr-r{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
+.ap-hbtn{padding:.45rem .9rem;border-radius:5px;border:none;font-family:'Nunito',sans-serif;font-size:.78rem;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:.04em;transition:all .2s;white-space:nowrap}
+.ap-hbtn.close-btn{background:rgba(255,255,255,.12);color:#fff}.ap-hbtn.close-btn:hover{background:rgba(255,255,255,.22)}
+
+/* TABS */
+.ap-tabs{display:flex;overflow-x:auto;background:var(--p2);border-bottom:1px solid rgba(184,137,42,.2);padding:0 1.5rem}
+.ap-tab{padding:.75rem 1.2rem;background:none;border:none;font-family:'Nunito',sans-serif;font-size:.8rem;font-weight:700;color:var(--ink-soft);cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;display:flex;align-items:center;gap:.4rem}
+.ap-tab:hover{color:var(--em)}
+.ap-tab.act{color:var(--em);border-bottom-color:var(--em)}
+.ap-badge{background:rgba(26,102,72,.1);color:var(--em);font-size:.68rem;padding:.1rem .4rem;border-radius:10px;font-weight:700}
+.ap-tab.act .ap-badge{background:var(--em);color:#fff}
+
+/* TAB PANES */
+.ap-body{flex:1;overflow-y:auto;padding:1.5rem 2rem}
+.ap-pane{display:none}.ap-pane.act{display:block}
+
+/* ADMIN TABLE */
+.aempty{text-align:center;padding:3rem;color:var(--ink-soft);font-style:italic}
+.atbl{width:100%;border-collapse:collapse;font-size:.82rem}
+.atbl thead th{text-align:left;padding:.65rem 1rem;background:var(--p2);color:var(--ink-mid);font-weight:700;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;position:sticky;top:0;z-index:1;border-bottom:1px solid rgba(184,137,42,.18)}
+.atbl tbody tr{border-bottom:1px solid rgba(184,137,42,.1);transition:background .2s}
+.atbl tbody tr:hover{background:rgba(184,137,42,.04)}
+.atbl td{padding:.7rem 1rem;color:var(--ink-mid);vertical-align:top}
+.anm{font-weight:700;color:var(--ink)}
+.acrs{background:rgba(26,102,72,.1);color:var(--em);padding:.18rem .5rem;border-radius:3px;font-size:.72rem;font-weight:700;white-space:nowrap}
+.a-soft{color:var(--ink-soft);font-size:.8rem}
+.adel{background:none;border:1px solid rgba(220,38,38,.2);color:#dc2626;border-radius:4px;padding:.22rem .4rem;cursor:pointer;font-size:.82rem;transition:all .2s}
+.adel:hover{background:rgba(220,38,38,.1)}
+.aedit{background:none;border:1px solid rgba(26,102,72,.2);color:var(--em);border-radius:4px;padding:.22rem .4rem;cursor:pointer;font-size:.82rem;transition:all .2s;margin-right:.3rem}
+.aedit:hover{background:rgba(26,102,72,.1)}
+
+/* ADMIN SEARCH/FILTER ROW */
+.a-ctrl{display:flex;gap:.8rem;align-items:center;margin-bottom:1.2rem;flex-wrap:wrap}
+.a-srch{padding:.55rem 1rem;border:1.5px solid rgba(184,137,42,.2);border-radius:6px;font-family:'Nunito',sans-serif;font-size:.85rem;outline:none;background:var(--p);color:var(--ink);min-width:220px;transition:border-color .3s}
+.a-srch:focus{border-color:var(--em)}
+.a-exp{padding:.5rem 1rem;background:linear-gradient(135deg,var(--em),var(--eml));color:#fff;border:none;border-radius:5px;font-family:'Nunito',sans-serif;font-size:.78rem;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:.04em;transition:all .2s}
+.a-exp:hover{opacity:.9}
+.a-del-all{padding:.5rem 1rem;background:rgba(220,38,38,.1);color:#dc2626;border:1px solid rgba(220,38,38,.2);border-radius:5px;font-family:'Nunito',sans-serif;font-size:.78rem;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:.04em;transition:all .2s}
+.a-del-all:hover{background:rgba(220,38,38,.18)}
+
+/* ADMIN FORM SECTION */
+.af-section{background:var(--p2);border:1px solid rgba(184,137,42,.15);border-radius:10px;padding:1.5rem;margin-bottom:1.5rem}
+.af-title{font-family:'Lora',serif;font-size:1.1rem;font-weight:700;color:var(--ink);margin-bottom:1.2rem}
+.afrow{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.afrow3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}
+.af-g{margin-bottom:.8rem}
+.af-g label{display:block;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-mid);margin-bottom:.4rem}
+.af-g input,.af-g select,.af-g textarea{width:100%;padding:.65rem .9rem;background:var(--p);border:1.5px solid rgba(184,137,42,.18);border-radius:5px;color:var(--ink);font-family:'Nunito',sans-serif;font-size:.88rem;transition:border-color .3s;outline:none}
+.af-g input:focus,.af-g select:focus,.af-g textarea:focus{border-color:var(--em);box-shadow:0 0 0 3px rgba(26,102,72,.08)}
+.af-g textarea{resize:vertical;min-height:80px}
+.af-g select option{background:var(--p)}
+.af-save{padding:.7rem 1.8rem;background:linear-gradient(135deg,var(--em),var(--eml));color:#fff;border:none;border-radius:6px;font-family:'Nunito',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:.05em;transition:all .3s;margin-top:.4rem}
+.af-save:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(26,102,72,.3)}
+.af-cancel{padding:.7rem 1.2rem;background:none;border:1px solid rgba(28,20,16,.15);color:var(--ink-soft);border-radius:6px;font-family:'Nunito',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;text-transform:uppercase;letter-spacing:.05em;transition:all .2s;margin-top:.4rem;margin-left:.5rem}
+.af-cancel:hover{border-color:var(--gold);color:var(--gold)}
+
+/* SITE INFO ADMIN */
+.si-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+
+/* API STATUS */
+.api-status{display:flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:600;padding:.35rem .8rem;border-radius:20px}
+.api-status.ok{background:rgba(26,102,72,.12);color:var(--em)}
+.api-status.err{background:rgba(220,38,38,.1);color:#dc2626}
+.api-status.off{background:rgba(184,137,42,.12);color:var(--gold)}
+.api-dot{width:7px;height:7px;border-radius:50%;animation:blink 1.8s ease-in-out infinite}
+.ok .api-dot{background:var(--em)}.err .api-dot{background:#dc2626}.off .api-dot{background:var(--gold);animation:none}
+
+@media(max-width:1024px){.pg{grid-template-columns:1fr 1fr}.fgrid{grid-template-columns:1fr 1fr}.evg,.blog-grid,.tg{grid-template-columns:1fr 1fr}}
+@media(max-width:900px){.h-pills{display:none}.cg{grid-template-columns:1fr}.aw{grid-template-columns:1fr}.sg{grid-template-columns:repeat(2,1fr)}.cw{grid-template-columns:1fr}}
+@media(max-width:700px){.nlinks{display:none}.hbg{display:flex}.pg{grid-template-columns:1fr}.frow,.afrow,.afrow3,.si-grid{grid-template-columns:1fr}.fgrid{grid-template-columns:1fr}.evg,.blog-grid,.tg{grid-template-columns:1fr}section{padding:4rem 5vw}.ap-main{max-height:95vh;border-radius:12px}.ap-body{padding:1rem}}
 </style>
 </head>
 <body>
 
-<div class="notif" id="notif"><span id="nico">✅</span><span class="notif-msg" id="nmsg">Done!</span></div>
+<div class="notif" id="notif"><span id="nico">✅</span><span class="notif-msg" id="nmsg"></span></div>
 
 <!-- NAV -->
 <nav id="nav">
-  <a href="#hero" class="nlogo">
-    <div class="nmark" id="nmark"></div>
-    <div class="nname" id="nname"></div>
-  </a>
+  <a href="#hero" class="nlogo"><div class="nmark" id="nmark"></div><div class="nname" id="nname"></div></a>
   <ul class="nlinks">
     <li><a href="#philosophy">Philosophy</a></li>
     <li><a href="#courses">Courses</a></li>
-    <li><a href="#audience">Who Joins</a></li>
-    <li><a href="#testimonials">Voices</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#blog">Blog</a></li>
     <li><a href="#faq">FAQ</a></li>
     <li><a href="#contact" class="nenroll">Enroll</a></li>
   </ul>
   <button class="hbg" id="hbg"><span></span><span></span><span></span></button>
 </nav>
-
 <div class="mmenu" id="mm">
   <a href="#philosophy" onclick="cm()">Philosophy</a>
   <a href="#courses"    onclick="cm()">Courses</a>
-  <a href="#audience"   onclick="cm()">Who Joins</a>
-  <a href="#testimonials" onclick="cm()">Voices</a>
+  <a href="#events"     onclick="cm()">Events</a>
+  <a href="#blog"       onclick="cm()">Blog</a>
   <a href="#faq"        onclick="cm()">FAQ</a>
   <a href="#contact"    onclick="cm()" style="color:var(--em)">Enroll →</a>
 </div>
@@ -507,38 +454,52 @@ const SITE = {
     <h1 class="h-title" id="htitle"></h1>
     <p class="h-desc" id="hdesc"></p>
     <div class="h-acts">
-      <a href="#courses"    class="b-em"  id="hcta1"></a>
-      <a href="#philosophy" class="b-out" id="hcta2"></a>
+      <a href="#courses" class="be">Explore Courses →</a>
+      <a href="#philosophy" class="bo">▸ Our Philosophy</a>
     </div>
   </div>
-  <div class="h-pills" id="hpills"></div>
+  <div class="h-pills">
+    <div class="h-pill"><span>☪️</span><span>Islamic Foundations</span></div>
+    <div class="h-pill"><span>🔬</span><span>Integrated Science</span></div>
+    <div class="h-pill"><span>📐</span><span>Mathematics &amp; Logic</span></div>
+    <div class="h-pill"><span>🗣️</span><span>Language Arts</span></div>
+  </div>
   <div class="sdwn"><span>Scroll</span><div class="sline"></div></div>
 </section>
 
 <!-- STATS -->
 <section id="stats">
-  <div class="stats-pat"></div>
-  <div class="sg" id="sg"></div>
+  <div class="spat"></div>
+  <div class="sg">
+    <div class="sb fi0"><span class="sn">4</span><span class="sl">Core Disciplines</span></div>
+    <div class="sb fi0 d1"><span class="sn">1</span><span class="sl">Day a Week — Sunday</span></div>
+    <div class="sb fi0 d2"><span class="sn">100%</span><span class="sl">Foundational Focus</span></div>
+    <div class="sb fi0 d3"><span class="sn">∞</span><span class="sl">Curiosity Encouraged</span></div>
+  </div>
 </section>
 
 <!-- PHILOSOPHY -->
 <section id="philosophy">
-  <div class="sh c fi">
-    <span class="stag" id="ptag"></span>
-    <h2 class="stitle" id="ptitle"></h2>
+  <div class="sh c fi0">
+    <span class="stag">✦ Our Guiding Principle</span>
+    <h2 class="stitle">Three Pillars of <em>Holistic Education</em></h2>
     <div class="div c"></div>
-    <p class="sdesc" id="pintro"></p>
+    <p class="sdesc">Every class at Wafa Academy is shaped by three inseparable ideals — drawn from the deepest wells of Islamic scholarship and universal human wisdom.</p>
   </div>
-  <div class="pg" id="pg"></div>
+  <div class="pg">
+    <div class="pc fi0"><span class="pi">🔭</span><div class="pt">Scientific Temper</div><p class="px">We cultivate curiosity, evidence-based reasoning, and empirical inquiry. Students are taught to observe, question, and seek truth — a spirit endorsed by the Quran itself: <em>'Do they not look at the sky above them?'</em> (50:6)</p></div>
+    <div class="pc fi0 d1"><span class="pi">📜</span><div class="pt">Philosophical Rigor</div><p class="px">Students engage with ideas deeply — tracing arguments to their foundations, examining assumptions, and building disciplined coherent thought. From Kalam to logic, from Aristotle to Ibn Rushd.</p></div>
+    <div class="pc fi0 d2"><span class="pi">🌿</span><div class="pt">Moral Benevolence</div><p class="px">Knowledge without character is incomplete. We nurture compassion, integrity, and responsibility toward family, community, and creation. <em>'The best among you is the one most beneficial to people.'</em></p></div>
+  </div>
 </section>
 
 <!-- COURSES -->
 <section id="courses">
-  <div class="sh fi">
-    <span class="stag" id="cotag"></span>
-    <h2 class="stitle" id="cotitle"></h2>
+  <div class="sh fi0">
+    <span class="stag">✦ What We Teach</span>
+    <h2 class="stitle">Foundational <em>Sunday Courses</em></h2>
     <div class="div"></div>
-    <p class="sdesc" id="cointro"></p>
+    <p class="sdesc">Four carefully designed disciplines, each taught every Sunday. Structured for beginners and advancing learners alike.</p>
   </div>
   <div class="sched" id="sched"></div>
   <div class="cg" id="cg"></div>
@@ -547,67 +508,80 @@ const SITE = {
 <!-- AUDIENCE -->
 <section id="audience">
   <div class="aw">
-    <div class="fi">
-      <span class="stag" id="atag"></span>
-      <h2 class="stitle" id="atitle"></h2>
+    <div class="fi0">
+      <span class="stag">✦ Who Can Join</span>
+      <h2 class="stitle">Open to <em>All Seekers of Knowledge</em></h2>
       <div class="div"></div>
-      <p class="sdesc" id="adesc" style="margin-bottom:1.8rem"></p>
-      <div class="ags" id="ags"></div>
-    </div>
-    <div class="avis fi d2">
-      <div class="aring ar1"></div>
-      <div class="aring ar2"></div>
-      <div class="acen">
-        <div class="acen-ar">علم</div>
-        <div class="acen-lb">Knowledge</div>
+      <p class="sdesc" style="margin-bottom:1.8rem">Wafa Academy welcomes students from all backgrounds. Our Sunday model fits around school, work, and family — making serious education accessible without compromise.</p>
+      <div class="ags">
+        <div class="ar"><div class="aico">🧒</div><div><div class="ati">School Students (Grades 5–12)</div><div class="ade">Supplement school learning with deeper conceptual foundations and Islamic grounding.</div></div></div>
+        <div class="ar"><div class="aico">🎓</div><div><div class="ati">College &amp; University Students</div><div class="ade">Revisit foundational disciplines with the rigor and perspective you never got before.</div></div></div>
+        <div class="ar"><div class="aico">👨</div><div><div class="ati">Working Professionals</div><div class="ade">Sunday-only classes mean you never have to choose between livelihood and learning.</div></div></div>
+        <div class="ar"><div class="aico">👩</div><div><div class="ati">Homemakers &amp; Adults</div><div class="ade">Lifelong learners are our most motivated students. All ages, all welcome.</div></div></div>
       </div>
+    </div>
+    <div class="avis fi0 d2">
+      <div class="aring ar1"></div><div class="aring ar2"></div>
+      <div class="acen"><div class="acen-ar">علم</div><div class="acen-lb">Knowledge</div></div>
       <div class="adot" style="top:18%;left:50%;transform:translateX(-50%)"></div>
       <div class="adot" style="bottom:18%;left:50%;transform:translateX(-50%)"></div>
     </div>
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
-<section id="testimonials">
-  <div class="sh c fi">
-    <span class="stag">✦ Student Voices</span>
-    <h2 class="stitle">What Our <em>Students Say</em></h2>
+<!-- EVENTS -->
+<section id="events">
+  <div class="sh c fi0">
+    <span class="stag">✦ Upcoming</span>
+    <h2 class="stitle">Events &amp; <em>Announcements</em></h2>
     <div class="div c"></div>
   </div>
-  <div class="tg" id="tg"></div>
+  <div class="evg" id="evg"><div class="ev-empty fi0">Loading events…</div></div>
+</section>
+
+<!-- BLOG -->
+<section id="blog">
+  <div class="sh c fi0">
+    <span class="stag">✦ From the Academy</span>
+    <h2 class="stitle">Articles &amp; <em>Reflections</em></h2>
+    <div class="div c"></div>
+    <p class="sdesc">Thoughts on knowledge, faith, science, and the examined life — updated regularly by our faculty and students.</p>
+  </div>
+  <div class="blog-grid" id="blog-grid"><div class="blog-empty fi0">Loading articles…</div></div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="sh c fi0"><span class="stag">✦ Student Voices</span><h2 class="stitle">What Our <em>Students Say</em></h2><div class="div c"></div></div>
+  <div class="tg">
+    <div class="tc fi0"><div class="tqm">"</div><div class="tst">★★★★★</div><p class="ttx">For the first time, I understood the Quran not just as recitation but as a living intellectual tradition. The teachers connect classical scholarship with questions we actually face today.</p><div class="tau"><div class="tav">SA</div><div><div class="tnm">Sana Ashraf</div><div class="tco">Islamic Foundations</div></div></div></div>
+    <div class="tc fi0 d1"><div class="tqm">"</div><div class="tst">★★★★★</div><p class="ttx">I never thought science and my faith could be taught together so naturally. Wafa Academy showed me that a Muslim who doesn't marvel at the cosmos hasn't read the Quran properly.</p><div class="tau"><div class="tav">BM</div><div><div class="tnm">Bilal Mir</div><div class="tco">Integrated Science</div></div></div></div>
+    <div class="tc fi0 d2"><div class="tqm">"</div><div class="tst">★★★★★</div><p class="ttx">Learning that algebra was invented by a Muslim scholar made me sit up straight in every class. The Sunday model fits perfectly around my children's school week.</p><div class="tau"><div class="tav">FR</div><div><div class="tnm">Fareeda Rashid</div><div class="tco">Mathematics &amp; Logic</div></div></div></div>
+  </div>
 </section>
 
 <!-- FAQ -->
 <section id="faq">
-  <div class="sh c fi">
-    <span class="stag">✦ Common Questions</span>
-    <h2 class="stitle">Frequently Asked <em>Questions</em></h2>
-    <div class="div c"></div>
-  </div>
-  <div class="fi-wrap" id="faqwrap"></div>
+  <div class="sh c fi0"><span class="stag">✦ Common Questions</span><h2 class="stitle">Frequently Asked <em>Questions</em></h2><div class="div c"></div></div>
+  <div class="fw" id="faqw"></div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact">
-  <div class="sh fi">
-    <span class="stag" id="ctag"></span>
-    <h2 class="stitle" id="ctitle"></h2>
-    <div class="div"></div>
-  </div>
+  <div class="sh fi0"><span class="stag">✦ Reach Us</span><h2 class="stitle">Come &amp; <em>Find Us</em></h2><div class="div"></div></div>
   <div class="cw">
-    <div class="cdet fi" id="cdet"></div>
-    <div class="cfw fi d2">
+    <div class="cdet fi0" id="cdet"></div>
+    <div class="cfw fi0 d2">
       <div class="ftl">Enrollment Inquiry</div>
-      <div class="fsb">Fill in the form and we will confirm your batch and timing within 48 hours.</div>
+      <div class="fsb">Fill in the form and we will confirm your batch within 48 hours.</div>
       <div class="frow">
         <div class="fg"><label>First Name</label><input type="text" placeholder="Ahmad" id="f1"/></div>
         <div class="fg"><label>Last Name</label><input type="text" placeholder="Khan" id="f2"/></div>
       </div>
       <div class="fg"><label>Email / Phone</label><input type="text" placeholder="email or +91 number" id="f3"/></div>
-      <div class="fg">
-        <label>Course(s) of Interest</label>
+      <div class="fg"><label>Course(s) of Interest</label>
         <select id="f4">
-          <option value="">Select a course...</option>
+          <option value="">Select a course…</option>
           <option>Islamic Foundations</option>
           <option>Integrated Science</option>
           <option>Mathematics &amp; Logic</option>
@@ -615,9 +589,9 @@ const SITE = {
           <option>All Four Courses</option>
         </select>
       </div>
-      <div class="fg"><label>Your Background / Grade</label><input type="text" placeholder="e.g. Class 10 / Adult learner / Working professional" id="f5"/></div>
-      <div class="fg"><label>Message (Optional)</label><textarea placeholder="Any questions or requirements?" id="f6"></textarea></div>
-      <button class="b-em" style="width:100%;justify-content:center" onclick="sub()">Submit Enrollment Request →</button>
+      <div class="fg"><label>Your Background / Grade</label><input type="text" placeholder="e.g. Class 10 / Adult learner" id="f5"/></div>
+      <div class="fg"><label>Message (Optional)</label><textarea placeholder="Any questions?" id="f6"></textarea></div>
+      <button class="be" style="width:100%;justify-content:center" onclick="submitEnroll()">Submit Enrollment Request →</button>
     </div>
   </div>
 </section>
@@ -625,14 +599,11 @@ const SITE = {
 <!-- ENROLL BANNER -->
 <section id="ebanner">
   <div class="epat"></div>
-  <div class="einner">
+  <div class="einn">
     <div class="ear">اِقْرَأْ بِاسْمِ رَبِّكَ</div>
     <h2 class="etitle">Classes Begin This Sunday.<br>Don't Miss Your Seat.</h2>
     <p class="edesc">Every Sunday is an opportunity to return to learning — combining the pursuit of ʿIlm with the clarity of reason and the warmth of good character.</p>
-    <div class="eacts">
-      <a href="#contact" class="b-pa">Enroll Now →</a>
-      <a href="#courses"  class="b-ol">View Courses</a>
-    </div>
+    <div class="eacts"><a href="#contact" class="bpa">Enroll Now →</a><a href="#courses" class="bol">View Courses</a></div>
   </div>
 </section>
 
@@ -640,23 +611,25 @@ const SITE = {
 <footer>
   <div class="fgrid">
     <div>
-      <a href="#hero" class="nlogo" style="display:inline-flex">
-        <div class="nmark" id="fmark"></div>
-        <div class="nname" id="fname2"></div>
-      </a>
+      <a href="#hero" class="nlogo" style="display:inline-flex"><div class="nmark" id="fmark"></div><div class="nname" id="fname2"></div></a>
       <div class="far-brand">وفا أكاديمي</div>
       <p class="fab" id="fab"></p>
     </div>
     <div>
       <div class="fct">Courses</div>
-      <ul class="flinks" id="flinks"></ul>
+      <ul class="flinks">
+        <li><a href="#courses">Islamic Foundations</a></li>
+        <li><a href="#courses">Integrated Science</a></li>
+        <li><a href="#courses">Mathematics &amp; Logic</a></li>
+        <li><a href="#courses">Language Arts</a></li>
+      </ul>
     </div>
     <div>
       <div class="fct">Quick Links</div>
       <ul class="flinks">
         <li><a href="#philosophy">Our Philosophy</a></li>
-        <li><a href="#audience">Who Can Join</a></li>
-        <li><a href="#testimonials">Student Voices</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#blog">Blog</a></li>
         <li><a href="#faq">FAQ</a></li>
         <li><a href="#contact">Contact &amp; Enroll</a></li>
       </ul>
@@ -669,119 +642,478 @@ const SITE = {
 </footer>
 
 <button class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<button id="adm-btn" onclick="openAdmin()" title="Admin Panel">⚙</button>
+
+<!-- RESOURCES MODAL -->
+<div class="modal-overlay" id="resModal" onclick="if(event.target===this)closeResModal()">
+  <div class="modal-box">
+    <div class="modal-hdr">
+      <div class="modal-hdr-title" id="resModalTitle">Course Resources</div>
+      <button class="modal-close" onclick="closeResModal()">✕</button>
+    </div>
+    <div class="modal-body" id="resModalBody"></div>
+  </div>
+</div>
+
+<!-- BLOG POST MODAL -->
+<div class="modal-overlay" id="blogModal" onclick="if(event.target===this)closeBlogModal()">
+  <div class="modal-box">
+    <div class="modal-hdr">
+      <div class="modal-hdr-title" id="blogModalTitle">Article</div>
+      <button class="modal-close" onclick="closeBlogModal()">✕</button>
+    </div>
+    <div class="modal-body" id="blogModalBody"></div>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="ap" id="ap" onclick="if(event.target===this)closeAdmin()">
+
+  <!-- LOGIN -->
+  <div class="ap-login" id="apLogin">
+    <div class="ap-lbox">
+      <div class="ap-llogo">🔐</div>
+      <h2 class="ap-ltitle">Admin Panel</h2>
+      <p class="ap-lsub">Your password is set in Google Apps Script — not stored here.</p>
+      <div class="ap-lnote" id="apApiStatus"></div>
+      <input id="apPw" type="password" class="ap-pw" placeholder="Enter admin password…" onkeydown="if(event.key==='Enter')doLogin()"/>
+      <div class="ap-err" id="apErr">❌ Incorrect password. Try again.</div>
+      <button class="ap-lbtn" onclick="doLogin()">Unlock →</button><br>
+      <button class="ap-lcancel" onclick="closeAdmin()">✕ Cancel</button>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="ap-main" id="apMain">
+    <div class="ap-hdr">
+      <div class="ap-hdr-l">
+        <div class="ap-hdr-ico">🏛</div>
+        <div><div class="ap-hdr-name">Wafa Academy — Admin</div><div class="ap-hdr-sub" id="apSub">Loading…</div></div>
+      </div>
+      <div class="ap-hdr-r">
+        <div class="api-status ok" id="apConnStatus"><div class="api-dot"></div><span>Connected</span></div>
+        <button class="ap-hbtn close-btn" onclick="closeAdmin()">✕ Close</button>
+      </div>
+    </div>
+    <div class="ap-tabs">
+      <button class="ap-tab act" onclick="switchTab('enrollments',this)">📋 Enrollments <span class="ap-badge" id="badge-e">0</span></button>
+      <button class="ap-tab" onclick="switchTab('blog',this)">✍️ Blog <span class="ap-badge" id="badge-b">0</span></button>
+      <button class="ap-tab" onclick="switchTab('events',this)">📅 Events <span class="ap-badge" id="badge-ev">0</span></button>
+      <button class="ap-tab" onclick="switchTab('resources',this)">📚 Resources <span class="ap-badge" id="badge-r">0</span></button>
+      <button class="ap-tab" onclick="switchTab('siteinfo',this)">⚙️ Site Info</button>
+    </div>
+    <div class="ap-body">
+
+      <!-- ENROLLMENTS TAB -->
+      <div class="ap-pane act" id="pane-enrollments">
+        <div class="a-ctrl">
+          <input type="search" class="a-srch" placeholder="🔍 Search name, contact, course…" oninput="renderEnrollments(this.value)"/>
+          <button class="a-exp" onclick="exportCSV()">⬇ Export CSV</button>
+          <button class="a-del-all" onclick="clearEnrollments()">🗑 Clear All</button>
+        </div>
+        <div id="eTable"></div>
+      </div>
+
+      <!-- BLOG TAB -->
+      <div class="ap-pane" id="pane-blog">
+        <div class="af-section">
+          <div class="af-title" id="blogFormTitle">✍️ Add New Blog Post</div>
+          <div class="afrow">
+            <div class="af-g"><label>Title *</label><input id="bTitle" placeholder="e.g. The Quran and the Scientific Worldview"/></div>
+            <div class="af-g"><label>Category</label>
+              <select id="bCat">
+                <option>Reflections</option><option>Islamic Studies</option><option>Science &amp; Faith</option>
+                <option>Philosophy</option><option>Mathematics</option><option>Language</option><option>Academy News</option>
+              </select>
+            </div>
+          </div>
+          <div class="afrow">
+            <div class="af-g"><label>Author</label><input id="bAuthor" placeholder="Wafa Academy" value="Wafa Academy"/></div>
+            <div class="af-g"><label>Tags (comma-separated)</label><input id="bTags" placeholder="e.g. Quran, science, epistemology"/></div>
+          </div>
+          <div class="af-g"><label>Summary (shown on card) *</label><input id="bSummary" placeholder="One or two lines that appear on the blog card…"/></div>
+          <div class="af-g"><label>Full Content *</label><textarea id="bContent" style="min-height:140px" placeholder="Write the full article here. You can use paragraphs — they will be formatted automatically."></textarea></div>
+          <input type="hidden" id="bEditId" value=""/>
+          <button class="af-save" onclick="saveBlog()">Save Post</button>
+          <button class="af-cancel" id="bCancelBtn" style="display:none" onclick="cancelBlogEdit()">Cancel Edit</button>
+        </div>
+        <div id="bTable"></div>
+      </div>
+
+      <!-- EVENTS TAB -->
+      <div class="ap-pane" id="pane-events">
+        <div class="af-section">
+          <div class="af-title">📅 Add New Event</div>
+          <div class="afrow">
+            <div class="af-g"><label>Event Title *</label><input id="evTitle" placeholder="e.g. Sunday Class — Special Session"/></div>
+            <div class="af-g"><label>Event Type</label>
+              <select id="evType">
+                <option>Class</option><option>Workshop</option><option>Seminar</option>
+                <option>Announcement</option><option>Holiday</option><option>Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="afrow3">
+            <div class="af-g"><label>Date</label><input type="date" id="evDate"/></div>
+            <div class="af-g"><label>Time</label><input type="text" id="evTime" placeholder="e.g. 9:00 AM – 11:00 AM"/></div>
+            <div class="af-g"><label>Location</label><input id="evLoc" placeholder="Wafa Academy, Srinagar"/></div>
+          </div>
+          <div class="af-g"><label>Description</label><textarea id="evDesc" placeholder="What's happening? Any preparations needed?"></textarea></div>
+          <button class="af-save" onclick="saveEvent()">Add Event</button>
+        </div>
+        <div id="evTable"></div>
+      </div>
+
+      <!-- RESOURCES TAB -->
+      <div class="ap-pane" id="pane-resources">
+        <div class="af-section">
+          <div class="af-title">📚 Add Course Resource</div>
+          <div class="afrow">
+            <div class="af-g"><label>Course *</label>
+              <select id="rCourse">
+                <option>Islamic Foundations</option><option>Integrated Science</option>
+                <option>Mathematics &amp; Logic</option><option>Language Arts</option><option>General</option>
+              </select>
+            </div>
+            <div class="af-g"><label>Resource Type</label>
+              <select id="rType">
+                <option>Link</option><option>PDF</option><option>Video</option>
+                <option>Book</option><option>Article</option><option>Exercise</option>
+              </select>
+            </div>
+          </div>
+          <div class="af-g"><label>Title *</label><input id="rTitle" placeholder="e.g. Introduction to Tajweed Rules"/></div>
+          <div class="af-g"><label>URL / Link</label><input id="rUrl" placeholder="https://…  (leave blank if no link)"/></div>
+          <div class="af-g"><label>Description</label><input id="rDesc" placeholder="Brief note about this resource"/></div>
+          <button class="af-save" onclick="saveResource()">Add Resource</button>
+        </div>
+        <div class="a-ctrl">
+          <select class="a-srch" style="min-width:200px" onchange="renderResources(this.value)" id="rFilter">
+            <option value="All">All Courses</option>
+            <option>Islamic Foundations</option><option>Integrated Science</option>
+            <option>Mathematics &amp; Logic</option><option>Language Arts</option><option>General</option>
+          </select>
+        </div>
+        <div id="rTable"></div>
+      </div>
+
+      <!-- SITE INFO TAB -->
+      <div class="ap-pane" id="pane-siteinfo">
+        <div class="af-section">
+          <div class="af-title">⚙️ Edit Site Information</div>
+          <p style="font-size:.82rem;color:var(--ink-soft);margin-bottom:1.2rem">Changes saved here will appear on the live website immediately after saving.</p>
+          <div class="si-grid">
+            <div class="af-g"><label>Academy Name</label><input id="si-name" placeholder="Wafa Academy"/></div>
+            <div class="af-g"><label>Hero Badge Text</label><input id="si-badge" placeholder="Foundational Sunday Classes · Srinagar, J&K"/></div>
+            <div class="af-g"><label>Hero Headline</label><input id="si-h1" placeholder="Nurturing Minds Rooted in"/></div>
+            <div class="af-g"><label>Hero Italic Line</label><input id="si-hem" placeholder="Knowledge & Virtue"/></div>
+            <div class="af-g"><label>Address</label><input id="si-addr" placeholder="Srinagar, J&K — 190001"/></div>
+            <div class="af-g"><label>Phone</label><input id="si-phone" placeholder="+91 000 000 0000"/></div>
+            <div class="af-g"><label>Email</label><input id="si-email" placeholder="info@wafaacademy.in"/></div>
+            <div class="af-g"><label>Office / Class Hours</label><input id="si-hours" placeholder="Sundays: 8:00 AM – 5:00 PM"/></div>
+            <div class="af-g"><label>Schedule Day</label><input id="si-day" placeholder="Every Sunday"/></div>
+            <div class="af-g"><label>Schedule Location</label><input id="si-sloc" placeholder="Srinagar, J&K"/></div>
+          </div>
+          <div class="af-g"><label>Schedule Note</label><input id="si-snote" placeholder="Batch timings confirmed at enrollment"/></div>
+          <div class="af-g"><label>Hero Description</label><textarea id="si-desc" style="min-height:70px"></textarea></div>
+          <div class="af-g"><label>Footer About Text</label><textarea id="si-fabout" style="min-height:60px"></textarea></div>
+          <div class="af-g"><label>Copyright Line</label><input id="si-copy" placeholder="© 2025 Wafa Academy…"/></div>
+          <button class="af-save" onclick="saveSiteInfo()">Save Site Info</button>
+        </div>
+      </div>
+
+    </div><!-- end ap-body -->
+  </div><!-- end ap-main -->
+</div><!-- end .ap -->
 
 <script>
 /* ════════════════════════════════════════════════════════════
-   RENDERER — reads SITE config and builds the page.
-   You do NOT need to edit anything below this comment.
+   WAFA ACADEMY — RENDERER & APP LOGIC
 ════════════════════════════════════════════════════════════ */
 const g  = id => document.getElementById(id);
 const s  = (id, h) => { const e = g(id); if(e) e.innerHTML = h; };
-const nm = n => {
-  const p = n.split(' ');
-  return p[0] + (p[1] ? ` <span>${p[1]}</span>` : '');
-};
+const nm = n => { const p = n.trim().split(' '); return p[0]+(p[1]?` <span>${p.slice(1).join(' ')}</span>`:''); };
 
-document.title = `${SITE.name} — ${SITE.tagline}`;
+/* ── STATE ────────────────────────────────────────────────── */
+let CONF = { ...DEFAULTS };   // merged config (defaults + server)
+let TOKEN    = sessionStorage.getItem('wa_token') || '';
+let adminOpen = false;
+let allEnrollments = [];
+let allBlogs = [];
+let allEvents = [];
+let allResources = [];
 
-// Logo
-s('nmark', SITE.logo_letter); s('fmark', SITE.logo_letter);
-s('nname', nm(SITE.name));    s('fname2', nm(SITE.name));
+/* ── API ──────────────────────────────────────────────────── */
+async function api(data) {
+  if (!API_URL) throw new Error('NO_API');
+  const resp = await fetch(API_URL, {
+    method: 'POST',
+    body: JSON.stringify({ ...data, token: TOKEN })
+  });
+  const json = await resp.json();
+  if (json.error) throw new Error(json.error);
+  return json;
+}
 
-// Hero
-s('hbadge', SITE.hero.badge);
-s('htitle', `${SITE.hero.headline}<br><em>${SITE.hero.headline_italic}</em>`);
-s('hdesc',  SITE.hero.description);
-s('hcta1',  SITE.hero.cta_primary + ' →');
-s('hcta2',  '▸ ' + SITE.hero.cta_secondary);
-s('hpills', SITE.courses.map(c =>
-  `<div class="h-pill"><span>${c.icon}</span><span>${c.tag}</span></div>`
-).join(''));
+async function apiGet(action, params = {}) {
+  if (!API_URL) throw new Error('NO_API');
+  const qs = new URLSearchParams({ action, ...params }).toString();
+  const resp = await fetch(API_URL + '?' + qs);
+  const json = await resp.json();
+  if (json.error) throw new Error(json.error);
+  return json;
+}
 
-// Stats
-s('sg', SITE.stats.map(st =>
-  `<div class="sb fi"><span class="sn">${st.number}</span><span class="sl">${st.label}</span></div>`
-).join(''));
+/* ── INIT ─────────────────────────────────────────────────── */
+async function init() {
+  renderStatic(); // show defaults immediately
 
-// Philosophy
-s('ptag',   '✦ ' + SITE.philosophy.tag);
-s('ptitle', `${SITE.philosophy.title} <em>${SITE.philosophy.title_italic}</em>`);
-s('pintro', SITE.philosophy.intro);
-s('pg', SITE.philosophy.pillars.map((p,i) =>
-  `<div class="pc fi d${i}"><span class="pi">${p.icon}</span><div class="pt">${p.title}</div><p class="px">${p.text}</p></div>`
-).join(''));
+  if (!API_URL) {
+    renderSite(CONF);
+    loadLocalPublic();
+    return;
+  }
 
-// Courses
-s('cotag',   '✦ ' + SITE.courses_section.tag);
-s('cotitle', `${SITE.courses_section.title} <em>${SITE.courses_section.title_italic}</em>`);
-s('cointro', SITE.courses_section.intro);
-s('sched',
-  `<div class="si">📅 ${SITE.schedule.day}</div>
-   <div class="si">📍 ${SITE.schedule.location}</div>
-   <div class="si">ℹ️ ${SITE.schedule.note}</div>`
-);
-s('cg', SITE.courses.map((c,i) =>
-  `<div class="cc fi d${i%2}">
-    <div class="ct" style="background:linear-gradient(135deg,${c.bg_from},${c.bg_to})">
-      <div class="ctp"></div>${c.icon}
-    </div>
-    <div class="cb">
-      <div class="ctag t-${c.tag_style}">${c.tag}</div>
-      <div class="ctitle">${c.title}</div>
-      <p class="cdesc">${c.description}</p>
-      <div class="cmeta">
-        <span>🎯 ${c.level}</span>
-        <span>🕐 ${c.timing}</span>
+  try {
+    const [siteRes, blogRes, evRes] = await Promise.all([
+      apiGet('getSiteInfo'),
+      apiGet('getBlogs'),
+      apiGet('getEvents')
+    ]);
+
+    // Merge server site info over defaults
+    if (siteRes.info) {
+      const m = siteRes.info;
+      if (m.name)          CONF.name          = m.name;
+      if (m.hero_badge)    CONF.hero_badge    = m.hero_badge;
+      if (m.hero_h1)       CONF.hero_h1       = m.hero_h1;
+      if (m.hero_em)       CONF.hero_em       = m.hero_em;
+      if (m.hero_desc)     CONF.hero_desc     = m.hero_desc;
+      if (m.address)       CONF.address       = m.address;
+      if (m.phone)         CONF.phone         = m.phone;
+      if (m.email)         CONF.email         = m.email;
+      if (m.hours)         CONF.hours         = m.hours;
+      if (m.map_note)      CONF.map_note      = m.map_note;
+      if (m.schedule_day)  CONF.schedule_day  = m.schedule_day;
+      if (m.schedule_loc)  CONF.schedule_loc  = m.schedule_loc;
+      if (m.schedule_note) CONF.schedule_note = m.schedule_note;
+      if (m.footer_about)  CONF.footer_about  = m.footer_about;
+      if (m.copyright)     CONF.copyright     = m.copyright;
+    }
+
+    renderSite(CONF);
+    allBlogs  = blogRes.posts  || [];
+    allEvents = evRes.events || [];
+    renderBlogCards(allBlogs);
+    renderEventCards(allEvents);
+  } catch(e) {
+    renderSite(CONF);
+    loadLocalPublic();
+  }
+}
+
+function loadLocalPublic() {
+  // Fallback: use localStorage for blog/events if no API
+  const lb = JSON.parse(localStorage.getItem('wa_blogs') || '[]');
+  const le = JSON.parse(localStorage.getItem('wa_events') || '[]');
+  allBlogs  = lb;
+  allEvents = le;
+  renderBlogCards(lb);
+  renderEventCards(le);
+}
+
+/* ── RENDER STATIC ────────────────────────────────────────── */
+function renderStatic() {
+  // Courses
+  s('cg', COURSES.map(c =>
+    `<div class="cc fi0">
+      <div class="ct" style="background:linear-gradient(135deg,${c.bg})">
+        <div class="ctp"></div>${c.icon}
       </div>
-    </div>
-  </div>`
-).join(''));
+      <div class="cb">
+        <div class="ctg t-${c.tc}">${c.tag}</div>
+        <div class="ctitle">${c.title}</div>
+        <p class="cdesc">${c.desc}</p>
+        <div class="cmeta"><span>🎯 ${c.level}</span><span>🕐 ${c.timing}</span></div>
+        <button class="cres-btn" onclick="openResModal('${c.title}')">📚 View Resources</button>
+      </div>
+    </div>`
+  ).join(''));
 
-// Audience
-s('atag',   '✦ ' + SITE.audience.tag);
-s('atitle', `${SITE.audience.title} <em>${SITE.audience.title_italic}</em>`);
-s('adesc',  SITE.audience.description);
-s('ags', SITE.audience.groups.map(g2 =>
-  `<div class="ar"><div class="aico">${g2.icon}</div>
-   <div><div class="ati">${g2.title}</div><div class="ade">${g2.desc}</div></div></div>`
-).join(''));
+  // FAQ
+  const FAQS = [
+    { q:"When exactly are classes held?", a:"All courses run exclusively on Sundays. Specific batch timings are confirmed at enrollment based on availability and your preference." },
+    { q:"Is prior Islamic knowledge required?", a:"Not at all. Courses are foundational. We place you in the right group after a brief conversation." },
+    { q:"What age group is the academy for?", a:"We welcome students from Grade 5 upward through adulthood. Separate batches for younger students and adults." },
+    { q:"Are all four courses compulsory?", a:"No — enroll in one, two, three, or all four. We recommend at least two to experience how the disciplines reinforce each other." },
+    { q:"Is this affiliated with any school or madrasa?", a:"Wafa Academy is independent. We deepen and complement school/madrasa education with an integrative, inquiry-driven approach." },
+    { q:"How do I enroll?", a:"Fill in the enrollment form on this page or contact us directly. Our team will confirm your batch within 24–48 hours." }
+  ];
+  s('faqw', FAQS.map(f =>
+    `<div class="fi"><button class="fq" onclick="tf(this)">${f.q}<span class="fic">+</span></button>
+     <div class="fa"><p>${f.a}</p></div></div>`
+  ).join(''));
+}
 
-// Testimonials
-s('tg', SITE.testimonials.map((t,i) =>
-  `<div class="tc fi d${i}"><div class="tqm">"</div>
-   <div class="tst">${'★'.repeat(t.stars)}</div>
-   <p class="ttx">${t.text}</p>
-   <div class="tau"><div class="tav">${t.initials}</div>
-   <div><div class="tnm">${t.name}</div><div class="tco">${t.course}</div></div></div></div>`
-).join(''));
+/* ── RENDER DYNAMIC SITE INFO ─────────────────────────────── */
+function renderSite(c) {
+  // Logo
+  ['nmark','fmark'].forEach(id => s(id, c.logo_letter || DEFAULTS.logo_letter));
+  ['nname','fname2'].forEach(id => s(id, nm(c.name || DEFAULTS.name)));
 
-// FAQ
-s('faqwrap', SITE.faqs.map(f =>
-  `<div class="fitem">
-    <button class="fq" onclick="tf(this)">${f.q}<span class="fic">+</span></button>
-    <div class="fa"><p>${f.a}</p></div>
-   </div>`
-).join(''));
+  // Hero
+  s('hbadge', c.hero_badge || DEFAULTS.hero_badge);
+  s('htitle', `${c.hero_h1 || DEFAULTS.hero_h1}<br><em>${c.hero_em || DEFAULTS.hero_em}</em>`);
+  s('hdesc', c.hero_desc || DEFAULTS.hero_desc);
 
-// Contact
-s('ctag',   '✦ ' + SITE.contact.tag);
-s('ctitle', `${SITE.contact.title} <em>${SITE.contact.title_em}</em>`);
-s('cdet',
-  `<div class="cbox"><div class="cic">📍</div><div><div class="clb">Location</div><div class="cvl">${SITE.contact.address}</div></div></div>
-   <div class="cbox"><div class="cic">📞</div><div><div class="clb">Phone / WhatsApp</div><div class="cvl">${SITE.contact.phone}</div></div></div>
-   <div class="cbox"><div class="cic">✉️</div><div><div class="clb">Email</div><div class="cvl">${SITE.contact.email}</div></div></div>
-   <div class="cbox"><div class="cic">🕐</div><div><div class="clb">Classes</div><div class="cvl">${SITE.contact.hours}</div></div></div>
-   <div class="cbox"><div class="cic">📌</div><div><div class="clb">Directions</div><div class="cvl">${SITE.contact.map_note}</div></div></div>`
-);
+  // Schedule banner
+  s('sched',
+    `<div class="sci">📅 ${c.schedule_day || DEFAULTS.schedule_day}</div>
+     <div class="sci">📍 ${c.schedule_loc || DEFAULTS.schedule_loc}</div>
+     <div class="sci">ℹ️ ${c.schedule_note || DEFAULTS.schedule_note}</div>`
+  );
 
-// Footer
-s('fab',    SITE.footer.about);
-s('fcopy',  SITE.footer.copyright);
-s('flinks', SITE.courses.map(c =>
-  `<li><a href="#courses">${c.title}</a></li>`
-).join(''));
+  // Contact
+  s('cdet',
+    `<div class="cbox"><div class="cic">📍</div><div><div class="clb">Location</div><div class="cvl">${c.address||DEFAULTS.address}</div></div></div>
+     <div class="cbox"><div class="cic">📞</div><div><div class="clb">Phone / WhatsApp</div><div class="cvl">${c.phone||DEFAULTS.phone}</div></div></div>
+     <div class="cbox"><div class="cic">✉️</div><div><div class="clb">Email</div><div class="cvl">${c.email||DEFAULTS.email}</div></div></div>
+     <div class="cbox"><div class="cic">🕐</div><div><div class="clb">Classes</div><div class="cvl">${c.hours||DEFAULTS.hours}</div></div></div>
+     <div class="cbox"><div class="cic">📌</div><div><div class="clb">Directions</div><div class="cvl">${c.map_note||DEFAULTS.map_note}</div></div></div>`
+  );
 
-// ── FAQ toggle
+  // Footer
+  s('fab',   c.footer_about || DEFAULTS.footer_about);
+  s('fcopy', c.copyright    || DEFAULTS.copyright);
+}
+
+/* ── BLOG CARDS ───────────────────────────────────────────── */
+function renderBlogCards(posts) {
+  if (!posts || !posts.length) {
+    s('blog-grid', `<div class="blog-empty">No articles published yet — check back soon.</div>`);
+    return;
+  }
+  s('blog-grid', posts.map((p, i) =>
+    `<div class="bc fi0 d${i%3}" onclick="openBlogModal(${i})">
+      <div class="bc-head">
+        <div class="bc-cat">${p.category||'Reflections'}</div>
+        ${(p.title||'').substring(0,12)}
+      </div>
+      <div class="bc-body">
+        <div class="bc-date">📅 ${p.date||''}</div>
+        <div class="bc-title">${p.title||'Untitled'}</div>
+        <div class="bc-sum">${p.summary||''}</div>
+        <div class="bc-footer">
+          <span class="bc-author">By ${p.author||'Wafa Academy'}</span>
+          <span class="bc-link">Read →</span>
+        </div>
+      </div>
+    </div>`
+  ).join(''));
+  observeNew();
+}
+
+function openBlogModal(idx) {
+  const p = allBlogs[idx];
+  if (!p) return;
+  s('blogModalTitle', p.title || 'Article');
+  const paras = (p.content || '').split('\n').filter(l => l.trim()).map(l => `<p>${l}</p>`).join('');
+  s('blogModalBody',
+    `<div class="blog-modal-meta">
+       <span>📅 ${p.date||''}</span>
+       <span>🏷 ${p.category||'Reflections'}</span>
+       <span>✍️ ${p.author||'Wafa Academy'}</span>
+       ${p.tags ? `<span>🔖 ${p.tags}</span>` : ''}
+     </div>
+     <div class="blog-content">${paras || '<p>'+p.summary+'</p>'}</div>`
+  );
+  g('blogModal').classList.add('open');
+}
+function closeBlogModal() { g('blogModal').classList.remove('open'); }
+
+/* ── EVENT CARDS ──────────────────────────────────────────── */
+function renderEventCards(events) {
+  if (!events || !events.length) {
+    s('evg', `<div class="ev-empty">No upcoming events. Check back soon!</div>`);
+    return;
+  }
+  s('evg', events.map((ev, i) =>
+    `<div class="evc fi0 d${i%3}">
+      <span class="ev-type">${ev.type||'Class'}</span>
+      <div class="ev-title">${ev.title||'Event'}</div>
+      <div class="ev-meta">
+        ${ev.event_date ? `<span>📅 ${ev.event_date}</span>` : ''}
+        ${ev.time       ? `<span>🕐 ${ev.time}</span>` : ''}
+        ${ev.location   ? `<span>📍 ${ev.location}</span>` : ''}
+      </div>
+      ${ev.description ? `<p class="ev-desc">${ev.description}</p>` : ''}
+    </div>`
+  ).join(''));
+  observeNew();
+}
+
+/* ── RESOURCES MODAL ──────────────────────────────────────── */
+async function openResModal(courseName) {
+  s('resModalTitle', `📚 Resources — ${courseName}`);
+  s('resModalBody', '<div class="res-empty">Loading resources…</div>');
+  g('resModal').classList.add('open');
+
+  try {
+    const res = API_URL
+      ? await apiGet('getResources', { course: courseName })
+      : { resources: JSON.parse(localStorage.getItem('wa_resources')||'[]').filter(r => r.course === courseName) };
+    const list = res.resources || [];
+    if (!list.length) { s('resModalBody', '<div class="res-empty">No resources added yet for this course.</div>'); return; }
+    const typeIco = { Link:'🔗', PDF:'📄', Video:'🎥', Book:'📖', Article:'📰', Exercise:'✏️' };
+    s('resModalBody', list.map(r =>
+      `<div class="res-item">
+        <div class="res-ico">${typeIco[r.type]||'📌'}</div>
+        <div style="flex:1">
+          <div class="res-title">${r.title}</div>
+          ${r.description ? `<div class="res-desc">${r.description}</div>` : ''}
+          ${r.url ? `<a class="res-link" href="${r.url}" target="_blank" rel="noopener">${r.url}</a>` : ''}
+        </div>
+        <span style="font-size:.7rem;color:var(--ink-soft)">${r.type}</span>
+      </div>`
+    ).join(''));
+  } catch(e) {
+    s('resModalBody', `<div class="res-empty">Could not load resources. ${API_URL ? 'Check API connection.' : 'Set up API first.'}</div>`);
+  }
+}
+function closeResModal() { g('resModal').classList.remove('open'); }
+
+/* ── ENROLLMENT FORM ──────────────────────────────────────── */
+async function submitEnroll() {
+  const fname = g('f1').value.trim(), lname = g('f2').value.trim();
+  const contact = g('f3').value.trim(), course = g('f4').value;
+  if (!fname || !contact || !course) { sn('⚠️','Please fill in Name, Contact, and Course.'); return; }
+
+  const data = { action:'enroll', firstName:fname, lastName:lname, contact, course, background:g('f5').value.trim(), message:g('f6').value.trim() };
+
+  try {
+    if (API_URL) {
+      await api(data);
+    } else {
+      // Offline mode: save to localStorage
+      const all = JSON.parse(localStorage.getItem('wa_enrollments')||'[]');
+      all.unshift({ id: Date.now(), date: new Date().toLocaleString(), ...data, status:'New' });
+      localStorage.setItem('wa_enrollments', JSON.stringify(all));
+    }
+    ['f1','f2','f3','f4','f5','f6'].forEach(id => g(id).value='');
+    sn('✅', `JazakAllah khair, ${fname}! We'll confirm your batch within 48 hours.`);
+  } catch(e) {
+    sn('⚠️', 'Could not save. Please contact us directly.');
+  }
+}
+
+/* ── NOTIFICATION ─────────────────────────────────────────── */
+function sn(ico, msg) {
+  g('nico').textContent = ico; g('nmsg').textContent = msg;
+  g('notif').classList.add('show');
+  setTimeout(() => g('notif').classList.remove('show'), 4500);
+}
+
+/* ── FAQ ──────────────────────────────────────────────────── */
 function tf(btn) {
   const a = btn.nextElementSibling, open = a.classList.contains('op');
   document.querySelectorAll('.fa.op').forEach(x => x.classList.remove('op'));
@@ -789,39 +1121,450 @@ function tf(btn) {
   if (!open) { a.classList.add('op'); btn.classList.add('act'); }
 }
 
-// ── Notification
-function sn(ico, msg) {
-  g('nico').textContent = ico; g('nmsg').textContent = msg;
-  g('notif').classList.add('show');
-  setTimeout(() => g('notif').classList.remove('show'), 4500);
-}
-
-// ── Enrollment form
-function sub() {
-  const n = g('f1').value.trim(), c = g('f3').value.trim(), co = g('f4').value;
-  if (!n || !c || !co) { sn('⚠️','Please fill in Name, Contact, and Course.'); return; }
-  ['f1','f2','f3','f4','f5','f6'].forEach(id => g(id).value = '');
-  sn('✅', `JazakAllah khair, ${n}! We'll confirm your batch within 48 hours.`);
-}
-
-// ── Nav scroll + back-to-top
+/* ── NAV ──────────────────────────────────────────────────── */
 window.addEventListener('scroll', () => {
   g('nav').classList.toggle('sc', scrollY > 60);
   g('btt').classList.toggle('vis', scrollY > 400);
-  document.querySelectorAll('.fi:not(.vis)').forEach(e => {
-    if (e.getBoundingClientRect().top < window.innerHeight - 50) e.classList.add('vis');
+  document.querySelectorAll('.fi0:not(.vis)').forEach(e => {
+    if (e.getBoundingClientRect().top < innerHeight - 40) e.classList.add('vis');
   });
 });
-
-// ── Mobile menu
 g('hbg').addEventListener('click', () => g('mm').classList.toggle('open'));
 function cm() { g('mm').classList.remove('open'); }
 
-// ── Intersection observer
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('vis'); obs.unobserve(e.target); } });
-}, { threshold: 0.1 });
-document.querySelectorAll('.fi').forEach(e => obs.observe(e));
+const obs = new IntersectionObserver(ee => ee.forEach(e => { if(e.isIntersecting){ e.target.classList.add('vis'); obs.unobserve(e.target); } }), { threshold: 0.1 });
+function observeNew() { document.querySelectorAll('.fi0:not(.vis)').forEach(e => obs.observe(e)); }
+document.querySelectorAll('.fi0').forEach(e => obs.observe(e));
+
+/* ════════════════════════════════════════════════════════════
+   ADMIN PANEL
+════════════════════════════════════════════════════════════ */
+function openAdmin() {
+  g('ap').classList.add('open');
+  adminOpen = true;
+  if (TOKEN) {
+    showAdminMain();
+  } else {
+    g('apLogin').style.display = 'flex';
+    g('apMain').classList.remove('open');
+    g('apErr').style.display = 'none';
+    g('apPw').value = '';
+    // Show API status
+    if (!API_URL) {
+      s('apApiStatus', '<span style="color:#dc2626">⚠️ API_URL not set — offline mode</span>');
+    } else {
+      s('apApiStatus', '<span style="color:var(--em)">🟢 Connected to Google Sheets</span>');
+    }
+    setTimeout(() => g('apPw').focus(), 200);
+  }
+}
+
+async function doLogin() {
+  const pw = g('apPw').value.trim();
+  if (!pw) return;
+
+  if (!API_URL) {
+    // Offline: use a hardcoded fallback password just for demo
+    if (pw === 'wafa2024') {
+      TOKEN = 'offline';
+      sessionStorage.setItem('wa_token', TOKEN);
+      showAdminMain();
+    } else {
+      g('apErr').style.display = 'block';
+    }
+    return;
+  }
+
+  try {
+    const res = await api({ action: 'adminLogin', password: pw, token: '' });
+    if (res.success && res.token) {
+      TOKEN = res.token;
+      sessionStorage.setItem('wa_token', TOKEN);
+      showAdminMain();
+    } else {
+      g('apErr').style.display = 'block';
+      g('apPw').value = '';
+      g('apPw').focus();
+    }
+  } catch(e) {
+    g('apErr').style.display = 'block';
+    g('apErr').textContent = '❌ ' + e.message;
+  }
+}
+
+function showAdminMain() {
+  g('apLogin').style.display = 'none';
+  g('apMain').classList.add('open');
+  loadAdminData();
+}
+
+async function loadAdminData() {
+  s('apSub', 'Loading data…');
+  try {
+    if (API_URL && TOKEN !== 'offline') {
+      const [er, br, evr, rr] = await Promise.all([
+        api({ action: 'getEnrollments' }),
+        apiGet('getBlogs'),
+        apiGet('getEvents'),
+        apiGet('getResources', { course: 'All' })
+      ]);
+      allEnrollments = er.enrollments || [];
+      allBlogs       = br.posts       || [];
+      allEvents      = evr.events     || [];
+      allResources   = rr.resources   || [];
+    } else {
+      allEnrollments = JSON.parse(localStorage.getItem('wa_enrollments')||'[]');
+      allBlogs       = JSON.parse(localStorage.getItem('wa_blogs')||'[]');
+      allEvents      = JSON.parse(localStorage.getItem('wa_events')||'[]');
+      allResources   = JSON.parse(localStorage.getItem('wa_resources')||'[]');
+    }
+    s('apSub', `${allEnrollments.length} enrollments · ${allBlogs.length} posts · ${allEvents.length} events`);
+    g('badge-e').textContent  = allEnrollments.length;
+    g('badge-b').textContent  = allBlogs.length;
+    g('badge-ev').textContent = allEvents.length;
+    g('badge-r').textContent  = allResources.length;
+    renderEnrollments('');
+    renderBlogTable();
+    renderEventTable();
+    renderResources('All');
+
+    // Load site info into form
+    const si = CONF;
+    ['name','hero_badge','hero_h1','hero_em','hero_desc','address','phone','email','hours','schedule_day','schedule_loc','schedule_note','footer_about','copyright'].forEach(k => {
+      const el = g('si-'+k.replace(/_/g,'-')); // map hero_badge → si-hero-badge etc
+      if(el) el.value = si[k] || DEFAULTS[k] || '';
+    });
+    // Special mapping
+    if(g('si-name'))     g('si-name').value = si.name||DEFAULTS.name;
+    if(g('si-badge'))    g('si-badge').value = si.hero_badge||DEFAULTS.hero_badge;
+    if(g('si-h1'))       g('si-h1').value = si.hero_h1||DEFAULTS.hero_h1;
+    if(g('si-hem'))      g('si-hem').value = si.hero_em||DEFAULTS.hero_em;
+    if(g('si-desc'))     g('si-desc').value = si.hero_desc||DEFAULTS.hero_desc;
+    if(g('si-addr'))     g('si-addr').value = si.address||DEFAULTS.address;
+    if(g('si-phone'))    g('si-phone').value = si.phone||DEFAULTS.phone;
+    if(g('si-email'))    g('si-email').value = si.email||DEFAULTS.email;
+    if(g('si-hours'))    g('si-hours').value = si.hours||DEFAULTS.hours;
+    if(g('si-day'))      g('si-day').value = si.schedule_day||DEFAULTS.schedule_day;
+    if(g('si-sloc'))     g('si-sloc').value = si.schedule_loc||DEFAULTS.schedule_loc;
+    if(g('si-snote'))    g('si-snote').value = si.schedule_note||DEFAULTS.schedule_note;
+    if(g('si-fabout'))   g('si-fabout').value = si.footer_about||DEFAULTS.footer_about;
+    if(g('si-copy'))     g('si-copy').value = si.copyright||DEFAULTS.copyright;
+
+  } catch(e) {
+    s('apSub', 'Error loading: ' + e.message);
+  }
+}
+
+function closeAdmin() {
+  g('ap').classList.remove('open');
+  adminOpen = false;
+}
+
+function switchTab(name, btn) {
+  document.querySelectorAll('.ap-tab').forEach(t => t.classList.remove('act'));
+  document.querySelectorAll('.ap-pane').forEach(p => p.classList.remove('act'));
+  btn.classList.add('act');
+  g('pane-'+name).classList.add('act');
+}
+
+/* ── ENROLLMENTS ─────────────────────────────────────────── */
+function renderEnrollments(q = '') {
+  let data = allEnrollments;
+  if (q) { const lq = q.toLowerCase(); data = data.filter(r => (r['first_name']||r['firstName']||''+r['last_name']||r['lastName']||''+r.contact+r.course).toLowerCase().includes(lq)); }
+  if (!data.length) { s('eTable', `<div class="aempty">📭 ${q ? 'No matching results.' : 'No enrollment submissions yet.'}</div>`); return; }
+  s('eTable',
+    `<table class="atbl"><thead><tr>
+       <th>#</th><th>Date</th><th>Name</th><th>Contact</th><th>Course</th><th>Background</th><th>Message</th><th></th>
+     </tr></thead><tbody>` +
+    data.map((r, i) => {
+      const fn = r['first_name']||r.firstName||'';
+      const ln = r['last_name'] ||r.lastName||'';
+      return `<tr>
+        <td class="a-soft">${data.length-i}</td>
+        <td class="a-soft">${r.date||''}</td>
+        <td class="anm">${fn} ${ln}</td>
+        <td style="color:var(--em);font-weight:600">${r.contact||''}</td>
+        <td><span class="acrs">${r.course||''}</span></td>
+        <td class="a-soft">${r.background||'—'}</td>
+        <td class="a-soft" title="${r.message||''}">${(r.message||'—').substring(0,35)}${(r.message||'').length>35?'…':''}</td>
+        <td><button class="adel" onclick="delEnrollment('${r.id}')">🗑</button></td>
+      </tr>`;
+    }).join('') + '</tbody></table>'
+  );
+}
+
+async function delEnrollment(id) {
+  if (!confirm('Delete this enrollment?')) return;
+  try {
+    if (API_URL && TOKEN !== 'offline') await api({ action:'delEnrollment', id });
+    else { let a=JSON.parse(localStorage.getItem('wa_enrollments')||'[]'); localStorage.setItem('wa_enrollments', JSON.stringify(a.filter(r=>String(r.id)!==String(id)))); }
+    allEnrollments = allEnrollments.filter(r => String(r.id) !== String(id));
+    g('badge-e').textContent = allEnrollments.length;
+    renderEnrollments('');
+    sn('✅', 'Record deleted.');
+  } catch(e) { sn('⚠️', e.message); }
+}
+
+function clearEnrollments() {
+  if (!confirm('Delete ALL enrollment records?')) return;
+  if (API_URL && TOKEN !== 'offline') {
+    Promise.all(allEnrollments.map(r => api({ action:'delEnrollment', id:r.id })))
+      .then(() => { allEnrollments=[]; g('badge-e').textContent=0; renderEnrollments(''); sn('✅','All cleared.'); })
+      .catch(e => sn('⚠️', e.message));
+  } else {
+    localStorage.removeItem('wa_enrollments');
+    allEnrollments=[]; g('badge-e').textContent=0; renderEnrollments(''); sn('✅','All cleared.');
+  }
+}
+
+function exportCSV() {
+  if (!allEnrollments.length) { sn('⚠️', 'No data to export.'); return; }
+  const hdr = ['#','Date','First Name','Last Name','Contact','Course','Background','Message'];
+  const rows = allEnrollments.map((r,i) => [
+    i+1, r.date||'',
+    r['first_name']||r.firstName||'',
+    r['last_name'] ||r.lastName||'',
+    r.contact||'', r.course||'',
+    r.background||'', (r.message||'').replace(/,/g,';')
+  ]);
+  const csv = [hdr,...rows].map(r => r.map(v => `"${v}"`).join(',')).join('\n');
+  const a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+  a.download = 'wafa-enrollments-' + new Date().toISOString().slice(0,10) + '.csv';
+  a.click();
+}
+
+/* ── BLOG ADMIN ───────────────────────────────────────────── */
+function renderBlogTable() {
+  if (!allBlogs.length) { s('bTable', '<div class="aempty">No blog posts yet. Add one above.</div>'); return; }
+  s('bTable',
+    `<table class="atbl"><thead><tr><th>#</th><th>Date</th><th>Title</th><th>Category</th><th>Author</th><th></th></tr></thead><tbody>` +
+    allBlogs.map((p,i) =>
+      `<tr><td class="a-soft">${allBlogs.length-i}</td>
+       <td class="a-soft">${p.date||''}</td>
+       <td class="anm">${p.title||''}</td>
+       <td><span class="acrs">${p.category||''}</span></td>
+       <td class="a-soft">${p.author||''}</td>
+       <td>
+         <button class="aedit" onclick="editBlog(${i})">✏️ Edit</button>
+         <button class="adel" onclick="delBlog('${p.id}')">🗑</button>
+       </td></tr>`
+    ).join('') + '</tbody></table>'
+  );
+}
+
+function editBlog(idx) {
+  const p = allBlogs[idx];
+  if (!p) return;
+  g('bTitle').value   = p.title||'';
+  g('bCat').value     = p.category||'Reflections';
+  g('bAuthor').value  = p.author||'Wafa Academy';
+  g('bTags').value    = p.tags||'';
+  g('bSummary').value = p.summary||'';
+  g('bContent').value = p.content||'';
+  g('bEditId').value  = p.id||'';
+  s('blogFormTitle', '✏️ Edit Blog Post');
+  g('bCancelBtn').style.display = 'inline-block';
+  g('pane-blog').scrollIntoView({ behavior:'smooth' });
+}
+
+function cancelBlogEdit() {
+  ['bTitle','bSummary','bContent','bTags','bEditId'].forEach(id => g(id).value='');
+  g('bAuthor').value = 'Wafa Academy';
+  s('blogFormTitle','✍️ Add New Blog Post');
+  g('bCancelBtn').style.display='none';
+}
+
+async function saveBlog() {
+  const title = g('bTitle').value.trim(), summary = g('bSummary').value.trim(), content = g('bContent').value.trim();
+  if (!title || !summary) { sn('⚠️','Title and Summary are required.'); return; }
+  const editId = g('bEditId').value;
+  const data = { title, category:g('bCat').value, author:g('bAuthor').value.trim()||'Wafa Academy', summary, content, tags:g('bTags').value.trim() };
+
+  try {
+    if (API_URL && TOKEN !== 'offline') {
+      if (editId) await api({ action:'updateBlog', id:editId, ...data });
+      else        await api({ action:'addBlog', ...data });
+      const br = await apiGet('getBlogs');
+      allBlogs = br.posts || [];
+    } else {
+      const all = JSON.parse(localStorage.getItem('wa_blogs')||'[]');
+      if (editId) {
+        const idx = all.findIndex(p => String(p.id)===String(editId));
+        if (idx >= 0) all[idx] = { ...all[idx], ...data };
+      } else {
+        all.unshift({ id:Date.now().toString(), date: new Date().toLocaleDateString('en-IN'), ...data });
+      }
+      localStorage.setItem('wa_blogs', JSON.stringify(all));
+      allBlogs = all;
+    }
+    cancelBlogEdit();
+    g('badge-b').textContent = allBlogs.length;
+    renderBlogTable();
+    renderBlogCards(allBlogs);
+    sn('✅', editId ? 'Post updated!' : 'Post published!');
+  } catch(e) { sn('⚠️', e.message); }
+}
+
+async function delBlog(id) {
+  if (!confirm('Delete this blog post?')) return;
+  try {
+    if (API_URL && TOKEN !== 'offline') await api({ action:'delBlog', id });
+    else { const a=JSON.parse(localStorage.getItem('wa_blogs')||'[]'); const n=a.filter(p=>String(p.id)!==String(id)); localStorage.setItem('wa_blogs',JSON.stringify(n)); allBlogs=n; }
+    allBlogs = allBlogs.filter(p => String(p.id) !== String(id));
+    g('badge-b').textContent = allBlogs.length;
+    renderBlogTable();
+    renderBlogCards(allBlogs);
+    sn('✅','Post deleted.');
+  } catch(e) { sn('⚠️', e.message); }
+}
+
+/* ── EVENTS ADMIN ─────────────────────────────────────────── */
+function renderEventTable() {
+  if (!allEvents.length) { s('evTable','<div class="aempty">No events yet. Add one above.</div>'); return; }
+  s('evTable',
+    `<table class="atbl"><thead><tr><th>#</th><th>Title</th><th>Date</th><th>Time</th><th>Type</th><th>Location</th><th></th></tr></thead><tbody>` +
+    allEvents.map((ev,i) =>
+      `<tr><td class="a-soft">${allEvents.length-i}</td>
+       <td class="anm">${ev.title||''}</td>
+       <td class="a-soft">${ev.event_date||ev['event_date']||''}</td>
+       <td class="a-soft">${ev.time||''}</td>
+       <td><span class="acrs">${ev.type||''}</span></td>
+       <td class="a-soft">${ev.location||''}</td>
+       <td><button class="adel" onclick="delEvent('${ev.id}')">🗑</button></td></tr>`
+    ).join('') + '</tbody></table>'
+  );
+}
+
+async function saveEvent() {
+  const title = g('evTitle').value.trim();
+  if (!title) { sn('⚠️','Event title is required.'); return; }
+  const data = { title, type:g('evType').value, event_date:g('evDate').value, time:g('evTime').value.trim(), location:g('evLoc').value.trim()||'Wafa Academy, Srinagar', description:g('evDesc').value.trim() };
+  try {
+    if (API_URL && TOKEN !== 'offline') {
+      await api({ action:'addEvent', ...data });
+      const evr = await apiGet('getEvents');
+      allEvents = evr.events || [];
+    } else {
+      const all = JSON.parse(localStorage.getItem('wa_events')||'[]');
+      all.unshift({ id:Date.now().toString(), added:new Date().toLocaleDateString(), ...data });
+      localStorage.setItem('wa_events', JSON.stringify(all));
+      allEvents = all;
+    }
+    ['evTitle','evTime','evLoc','evDesc'].forEach(id => g(id).value='');
+    g('evDate').value = '';
+    g('badge-ev').textContent = allEvents.length;
+    renderEventTable();
+    renderEventCards(allEvents);
+    sn('✅','Event added!');
+  } catch(e) { sn('⚠️', e.message); }
+}
+
+async function delEvent(id) {
+  if (!confirm('Delete this event?')) return;
+  try {
+    if (API_URL && TOKEN !== 'offline') await api({ action:'delEvent', id });
+    else { const a=JSON.parse(localStorage.getItem('wa_events')||'[]'); const n=a.filter(e=>String(e.id)!==String(id)); localStorage.setItem('wa_events',JSON.stringify(n)); allEvents=n; }
+    allEvents = allEvents.filter(e => String(e.id) !== String(id));
+    g('badge-ev').textContent = allEvents.length;
+    renderEventTable();
+    renderEventCards(allEvents);
+    sn('✅','Event deleted.');
+  } catch(e) { sn('⚠️', e.message); }
+}
+
+/* ── RESOURCES ADMIN ──────────────────────────────────────── */
+function renderResources(course = 'All') {
+  let data = course === 'All' ? allResources : allResources.filter(r => r.course === course);
+  if (!data.length) { s('rTable', `<div class="aempty">No resources for ${course}. Add some above.</div>`); return; }
+  const typeIco = { Link:'🔗', PDF:'📄', Video:'🎥', Book:'📖', Article:'📰', Exercise:'✏️' };
+  s('rTable',
+    `<table class="atbl"><thead><tr><th>#</th><th>Course</th><th>Title</th><th>Type</th><th>URL</th><th>Description</th><th></th></tr></thead><tbody>` +
+    data.map((r,i) =>
+      `<tr><td class="a-soft">${data.length-i}</td>
+       <td><span class="acrs">${r.course||''}</span></td>
+       <td class="anm">${r.title||''}</td>
+       <td>${typeIco[r.type]||'📌'} ${r.type||''}</td>
+       <td>${r.url ? `<a href="${r.url}" target="_blank" style="color:var(--em);font-size:.8rem;word-break:break-all">${r.url.substring(0,40)}…</a>` : '—'}</td>
+       <td class="a-soft">${r.description||'—'}</td>
+       <td><button class="adel" onclick="delResource('${r.id}')">🗑</button></td></tr>`
+    ).join('') + '</tbody></table>'
+  );
+}
+
+async function saveResource() {
+  const title = g('rTitle').value.trim(), course = g('rCourse').value;
+  if (!title) { sn('⚠️','Resource title is required.'); return; }
+  const data = { course, title, type:g('rType').value, url:g('rUrl').value.trim(), description:g('rDesc').value.trim() };
+  try {
+    if (API_URL && TOKEN !== 'offline') {
+      await api({ action:'addResource', ...data });
+      const rr = await apiGet('getResources', { course:'All' });
+      allResources = rr.resources || [];
+    } else {
+      const all = JSON.parse(localStorage.getItem('wa_resources')||'[]');
+      all.unshift({ id:Date.now().toString(), date:new Date().toLocaleDateString(), ...data });
+      localStorage.setItem('wa_resources', JSON.stringify(all));
+      allResources = all;
+    }
+    ['rTitle','rUrl','rDesc'].forEach(id => g(id).value='');
+    g('badge-r').textContent = allResources.length;
+    renderResources(g('rFilter').value);
+    sn('✅','Resource added!');
+  } catch(e) { sn('⚠️', e.message); }
+}
+
+async function delResource(id) {
+  if (!confirm('Delete this resource?')) return;
+  try {
+    if (API_URL && TOKEN !== 'offline') await api({ action:'delResource', id });
+    else { const a=JSON.parse(localStorage.getItem('wa_resources')||'[]'); const n=a.filter(r=>String(r.id)!==String(id)); localStorage.setItem('wa_resources',JSON.stringify(n)); allResources=n; }
+    allResources = allResources.filter(r => String(r.id) !== String(id));
+    g('badge-r').textContent = allResources.length;
+    renderResources(g('rFilter').value);
+    sn('✅','Resource deleted.');
+  } catch(e) { sn('⚠️', e.message); }
+}
+
+/* ── SITE INFO ────────────────────────────────────────────── */
+async function saveSiteInfo() {
+  const info = {
+    name:          g('si-name').value.trim(),
+    hero_badge:    g('si-badge').value.trim(),
+    hero_h1:       g('si-h1').value.trim(),
+    hero_em:       g('si-hem').value.trim(),
+    hero_desc:     g('si-desc').value.trim(),
+    address:       g('si-addr').value.trim(),
+    phone:         g('si-phone').value.trim(),
+    email:         g('si-email').value.trim(),
+    hours:         g('si-hours').value.trim(),
+    schedule_day:  g('si-day').value.trim(),
+    schedule_loc:  g('si-sloc').value.trim(),
+    schedule_note: g('si-snote').value.trim(),
+    footer_about:  g('si-fabout').value.trim(),
+    copyright:     g('si-copy').value.trim()
+  };
+  try {
+    if (API_URL && TOKEN !== 'offline') {
+      await api({ action:'updateSiteInfo', info: JSON.stringify(info) });
+    } else {
+      localStorage.setItem('wa_siteinfo', JSON.stringify(info));
+    }
+    CONF = { ...CONF, ...info };
+    renderSite(CONF);
+    sn('✅','Site info updated! Changes are live.');
+  } catch(e) { sn('⚠️', e.message); }
+}
+
+/* ── ESC KEY ──────────────────────────────────────────────── */
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeAdmin(); closeResModal(); closeBlogModal();
+  }
+});
+
+// ── BOOT
+init();
 </script>
 </body>
 </html>
